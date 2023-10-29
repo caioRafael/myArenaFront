@@ -2,12 +2,18 @@ import Image from 'next/image'
 import { ReactNode } from 'react'
 
 import InitialImage from '@/assets/Inital-page-image.svg'
+import { getServerSession } from 'next-auth'
+import { nextAuthOptions } from '../api/auth/[...nextauth]/route'
+import { redirect } from 'next/navigation'
 
 interface AppLayoutProps {
   children: ReactNode
 }
 
-export default function AppLayout({ children }: AppLayoutProps) {
+export default async function AppLayout({ children }: AppLayoutProps) {
+  const session = await getServerSession(nextAuthOptions)
+
+  if (session) redirect('/home')
   return (
     <main className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] w-screen min-h-screen">
       <div className="hidden md:flex w-full h-full items-center justify-center">

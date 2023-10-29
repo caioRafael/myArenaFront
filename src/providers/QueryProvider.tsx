@@ -16,7 +16,7 @@ export function QueryProvider(props: QueryProviderProps) {
     <QueryClientProvider client={queryClient}>
       {/* <Hydrate state={dehydratedState}>{children}</Hydrate> */}
       {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
     </QueryClientProvider>
   )
 }
