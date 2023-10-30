@@ -1,3 +1,5 @@
+import { Header } from '@/components/Header'
+import { SideBar } from '@/components/SideBar'
 import { getUser } from '@/lib/auth'
 import { ReactNode } from 'react'
 
@@ -6,14 +8,12 @@ interface AppLayoutProps {
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const { token } = await getUser()
+  const { username } = await getUser()
   return (
-    <main className="flex flex-col p-10 items-center justify-center gap-7">
-      <h1>Logado</h1>
-      <div className="flex flex-col p-10 items-center justify-center gap-7">
-        <h1 className="font-semibold text-3xl">
-          <span className="text-primary">My</span> Arena
-        </h1>
+    <main className="flex flex-col  w-screen h-screen">
+      <Header username={username} />
+      <div className="grid grid-cols-[1fr] md:grid-cols-[16rem_1fr] w-full">
+        <SideBar />
 
         {children}
       </div>

@@ -1,7 +1,9 @@
+import { AppPage } from '@/components/AppPage'
+
 export default function Home() {
   return (
-    <div>
+    <AppPage title="Dashboard">
       <h1>ola mundo</h1>
-    </div>
+    </AppPage>
   )
 }
