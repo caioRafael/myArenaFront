@@ -1,18 +1,19 @@
+import { getUser } from '@/lib/auth'
 import { MobileSidbar } from './MobileSidbar'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Button } from './ui/button'
 
 interface HeaderProps {
   username: string
 }
 
-export function Header(props: HeaderProps) {
+export async function Header(props: HeaderProps) {
   const { username } = props
+  const { arena } = await getUser()
 
   const initalsName = username.split(' ') as string[]
   return (
     <div className="w-full h-20 flex items-center justify-between p-4 border-b border-border bg-primary">
-      <MobileSidbar username={username} />
+      <MobileSidbar username={username} arena={arena.fantasyName} />
 
       <h1 className="font-semibold text-3xl">
         <span className="text-white">My</span> Arena

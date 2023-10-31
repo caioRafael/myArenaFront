@@ -7,16 +7,19 @@ import { signOut } from 'next-auth/react'
 
 interface SideBarProps {
   isMobile?: boolean
+  closeSheet?: (value: boolean) => void
+  arena: string
 }
 
 export function SideBar(props: SideBarProps) {
-  const { isMobile = false } = props
+  const { isMobile = false, closeSheet, arena } = props
   const pathname = usePathname()
   const currentPage = pathname.split('/')[1]
   const router = useRouter()
 
   const goToPage = (route: string) => {
     router.push(`/${route}`)
+    if (isMobile && closeSheet) closeSheet(false)
   }
 
   async function logout() {
@@ -48,8 +51,10 @@ export function SideBar(props: SideBarProps) {
         isMobile ? 'hidden' : 'flex'
       } flex-col flex-1 px-4 py-10 gap-2 border-r`}
     >
+      <h1 className="self-center font-semibold mb-3">{arena.toUpperCase()}</h1>
+
       {routes.map((route) => (
-        <>
+        <div className="flex flex-col gap-2" key={route.key}>
           <Button
             key={route.key}
             variant={currentPage === route.route ? 'default' : 'ghost'}
@@ -60,7 +65,7 @@ export function SideBar(props: SideBarProps) {
             {route.name}
           </Button>
           <Separator />
-        </>
+        </div>
       ))}
       <Button
         variant={'ghost'}

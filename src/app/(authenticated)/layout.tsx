@@ -8,12 +8,12 @@ interface AppLayoutProps {
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const { username } = await getUser()
+  const { username, arena } = await getUser()
   return (
     <main className="flex flex-col  w-screen h-screen">
       <Header username={username} />
       <div className="grid grid-cols-[1fr] md:grid-cols-[16rem_1fr] w-full">
-        <SideBar />
+        <SideBar arena={arena.fantasyName} />
 
         {children}
       </div>

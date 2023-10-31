@@ -1,6 +1,9 @@
 'use client'
 
 import { fieldQueryService } from '@/services/fields'
+import { FieldCard } from './FieldCard'
+import { Input } from '@/components/ui/input'
+import { FieldSheetCreate } from './FieldSheetCreate'
 
 interface FieldsContainersProps {
   arenaId: string
@@ -11,9 +14,18 @@ export function FieldsContainers(props: FieldsContainersProps) {
   const { arenaId, token } = props
   const { data } = fieldQueryService.useFindAll(arenaId, token)
   return (
-    <div>
-      <h1>ola mundo</h1>
-      {JSON.stringify(data)}
+    <div className="flex flex-col gap-3 ">
+      <div className="flex flex-col md:flex-row gap-3 items-center justify-between">
+        <Input
+          placeholder="Pesquisa"
+          className="w-full md:w-1/3"
+          type="search"
+        />
+        <FieldSheetCreate arenaId={arenaId} token={token} />
+      </div>
+      <div className="w-full h-full flex flex-wrap gap-3 justify-center md:justify-start mt-10">
+        {data?.map((field) => <FieldCard key={field.id} field={field} />)}
+      </div>
     </div>
   )
 }

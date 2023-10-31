@@ -11,7 +11,7 @@ export function AppPage(props: AppPageProps) {
   return (
     <div className="w-full h-page flex flex-col gap-2 p-10 overflow-scroll">
       <Title title={title} />
-      {children}
+      <div className="mt-10 w-full h-full">{children}</div>
     </div>
   )
 }
