@@ -1,5 +1,6 @@
 import { IBaseApi } from '@/lib/api/IBaseApi'
 import { ResourceService } from '@/lib/api/ResourceService'
+import { api } from '@/lib/api/api'
 import Field from '@/types/Field'
 
 export class FieldService implements ResourceService<Field, Field> {
@@ -46,9 +47,7 @@ export class FieldService implements ResourceService<Field, Field> {
   }
 
   async findAvaliableTimes(fieldId: string, date: string): Promise<string[]> {
-    const response = await this.baseApi.getAll(
-      `/schedule/times/${fieldId}?date=${date}`,
-    )
+    const response = await api.get(`/schedule/times/${fieldId}?date=${date}`)
 
     return response.data as string[]
   }

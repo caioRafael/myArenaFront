@@ -24,7 +24,7 @@ export class ScheduleService implements ResourceService<Schedule, Schedule> {
   }
 
   async create(data: Schedule, token: string): Promise<Schedule | null> {
-    const response = await this.baseApi.post('/schedules', data, token)
+    const response = await this.baseApi.post('/schedule', data, token)
 
     return response.data as Schedule
   }

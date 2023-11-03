@@ -10,6 +10,11 @@ import { toast } from '@/components/ui/use-toast'
 import { queryClient } from '@/providers/QueryProvider'
 import { AxiosError } from 'axios'
 
+export interface DataError {
+  statusCode: number
+  message: string
+}
+
 export class ResourceQueryService<Q, C> {
   resourceService: ResourceService<Q, C>
   key: string
@@ -62,12 +67,12 @@ export class ResourceQueryService<Q, C> {
         }
         this.invalidateQueries()
       },
-      onError: (error: AxiosError) => {
-        const firstKey = Object.keys(error.response?.data as any)[0]
+      onError: (error: AxiosError<DataError>) => {
+        console.log(error.response?.data)
         if (error) {
           toast({
             title: 'Erro',
-            description: (error.response?.data as any)[firstKey],
+            description: error.response?.data.message as string,
             variant: 'destructive',
           })
         }
