@@ -27,7 +27,7 @@ export function FieldSheetCreate(props: FieldSheetCreateProps) {
   const [closeIn, setCloseIn] = useState<string>('')
   const [price, setPrice] = useState<number | undefined>(0)
 
-  const { mutateAsync, isPending } = fieldQueryService.useCreate(token)
+  const { mutateAsync } = fieldQueryService.useCreate(token)
 
   const addSport = () => {
     setSports([...sports, currentSport])
