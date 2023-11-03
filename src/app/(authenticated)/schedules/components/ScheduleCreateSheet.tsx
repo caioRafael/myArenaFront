@@ -14,7 +14,7 @@ import {
 import { fieldQueryService, fieldService } from '@/services/fields'
 import { scheduleQueryService } from '@/services/schedule'
 import Schedule from '@/types/Schedule'
-import convetHourInDate from '@/utils/convetHourInDate'
+import { convertHourInNumber } from '@/utils/convetHourInDate'
 import { useEffect, useMemo, useState } from 'react'
 
 interface ScheduleCreateSheetProps {
@@ -33,7 +33,6 @@ export function ScheduleCreateSheet(props: ScheduleCreateSheetProps) {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [amount, setAmount] = useState<number>(0)
   const [sport, setSport] = useState<string>('')
-  const [listDate, setListDate] = useState<string[]>([])
   const [fieldId, setFieldId] = useState<string>('')
 
   const sportList = useMemo(() => {
@@ -42,14 +41,6 @@ export function ScheduleCreateSheet(props: ScheduleCreateSheetProps) {
     return selectedField?.sports.split(',')
   }, [fieldId, data])
 
-  useEffect(() => {
-    if (date && fieldId !== '') {
-      fieldService
-        .findAvaliableTimes(fieldId, date.toString() as string)
-        .then((list) => setListDate(list))
-    }
-  }, [date, fieldId])
-
   const createSchedule = async () => {
     const data = {
       amountHours: amount,
@@ -57,11 +48,10 @@ export function ScheduleCreateSheet(props: ScheduleCreateSheetProps) {
       clientPhone,
       date,
       fieldId,
-      hour: convetHourInDate(hour, date),
+      hour: convertHourInNumber(hour),
       sport,
     } as Schedule
 
-    console.log(data)
     await mutateAsync(data)
     setOpen(false)
   }

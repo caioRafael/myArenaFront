@@ -15,8 +15,13 @@ interface CalendarProps {
 
 export function SchedulesContainer(props: CalendarProps) {
   const { token, arenaId } = props
-  const [date, setDate] = useState<Date | undefined>(new Date())
-  const { data, refetch } = scheduleQueryService.useFindAll(date, token)
+  const currentDate = new Date().setHours(0, 0, 0, 0)
+  const [date, setDate] = useState<Date | undefined>(new Date(currentDate))
+  const { data, refetch } = scheduleQueryService.useFindAll(
+    arenaId,
+    date,
+    token,
+  )
   return (
     <div className="flex flex-col w-full gap-6">
       <div className="flex items-center justify-between gap-4 flex-wrap">
@@ -27,7 +32,7 @@ export function SchedulesContainer(props: CalendarProps) {
         <ScheduleCreateSheet arenaId={arenaId} />
       </div>
       {data?.map((schedule) => (
-        <ScheduleCard schedule={schedule} key={schedule.key} />
+        <ScheduleCard schedule={schedule} key={schedule.id} />
       ))}
       {data?.length === 0 && (
         <EmptyState message="Nenhum agendamento nessa data" />

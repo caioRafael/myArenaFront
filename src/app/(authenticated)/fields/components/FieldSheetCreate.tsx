@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { fieldQueryService } from '@/services/fields'
 import Field from '@/types/Field'
-import convetHourInDate from '@/utils/convetHourInDate'
+import { convertHourInNumber } from '@/utils/convetHourInDate'
 import { Plus, X } from 'lucide-react'
 import { useCallback, useMemo, useState } from 'react'
 
@@ -42,8 +42,8 @@ export function FieldSheetCreate(props: FieldSheetCreateProps) {
     const data = {
       name,
       price: price as number,
-      openIn: convetHourInDate(openIn),
-      closeIn: convetHourInDate(closeIn),
+      openIn: convertHourInNumber(openIn),
+      closeIn: convertHourInNumber(closeIn),
       arenaId,
       sports: sports.join(', '),
     } as Field

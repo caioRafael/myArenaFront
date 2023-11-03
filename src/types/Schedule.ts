@@ -3,8 +3,8 @@ import Field from './Field'
 
 export default interface Schedule extends Entity {
   date: Date
-  hour: Date
-  endHour?: Date
+  hour: number
+  endHour?: number
   amountHours: number
   clientName: string
   clientPhone: string

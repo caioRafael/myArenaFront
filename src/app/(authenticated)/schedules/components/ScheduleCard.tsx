@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import Schedule from '@/types/Schedule'
 import { format } from 'date-fns'
 import { ScheduleDetailSheet } from './ScheduleDetailSheet'
+import { convertNumberInHour } from '@/utils/convetHourInDate'
 
 interface ScheduleCardProps {
   schedule: Schedule
@@ -27,9 +28,9 @@ export function ScheduleCard(props: ScheduleCardProps) {
       </div>
       <div className="flex flex-col gap-1">
         <b>Horário:</b>
-        {format(new Date(schedule.hour), 'hh:mm')}
+        {convertNumberInHour(schedule.hour)}
         {' - '}
-        {format(new Date(schedule?.endHour as Date), 'hh:mm')}
+        {convertNumberInHour(schedule.endHour as number)}
       </div>
       <div className="flex items-center justify-center self-center w-full md:w-16 md:pr-10">
         <ScheduleDetailSheet schedule={schedule} />

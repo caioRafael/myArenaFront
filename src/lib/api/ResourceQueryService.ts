@@ -68,7 +68,6 @@ export class ResourceQueryService<Q, C> {
         this.invalidateQueries()
       },
       onError: (error: AxiosError<DataError>) => {
-        console.log(error.response?.data)
         if (error) {
           toast({
             title: 'Erro',

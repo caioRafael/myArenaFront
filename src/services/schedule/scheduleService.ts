@@ -13,8 +13,15 @@ export class ScheduleService implements ResourceService<Schedule, Schedule> {
     throw new Error('Method not implemented.')
   }
 
-  async findAll(date: string, token: string): Promise<Schedule[]> {
-    const response = await this.baseApi.getAll(`/schedule/${date}`, token)
+  async findAll(
+    arenaId: string,
+    date: string,
+    token: string,
+  ): Promise<Schedule[]> {
+    const response = await this.baseApi.getAll(
+      `/schedule/arena/${arenaId}?date=${date}`,
+      token,
+    )
 
     return response.data
   }
