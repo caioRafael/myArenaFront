@@ -4,8 +4,8 @@ import Entity from './Entity'
 export default interface Field extends Entity {
   name: string
   price: number
-  openIn: Date
-  closeIn: Date
+  openIn: number
+  closeIn: number
   sports: string
   arenaId: string
   arena?: Arena

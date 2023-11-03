@@ -1,5 +1,6 @@
 import { IBaseApi } from '@/lib/api/IBaseApi'
 import { ResourceService } from '@/lib/api/ResourceService'
+import { api } from '@/lib/api/api'
 import Field from '@/types/Field'
 
 export class FieldService implements ResourceService<Field, Field> {
@@ -13,8 +14,8 @@ export class FieldService implements ResourceService<Field, Field> {
     throw new Error('Method not implemented.')
   }
 
-  async findAll(id: string, token: string): Promise<Field[]> {
-    const response = await this.baseApi.getAll(`/fields/arena/${id}`, token)
+  async findAll(id: string): Promise<Field[]> {
+    const response = await this.baseApi.getAll(`/fields/arena/${id}`)
 
     return response.data
   }
@@ -43,6 +44,12 @@ export class FieldService implements ResourceService<Field, Field> {
 
   async comment(): Promise<Field | null> {
     throw new Error('Method not implemented.')
+  }
+
+  async findAvaliableTimes(fieldId: string, date: string): Promise<string[]> {
+    const response = await api.get(`/schedule/times/${fieldId}?date=${date}`)
+
+    return response.data as string[]
   }
 
   queryToCommand(executionTest: Field): Field {

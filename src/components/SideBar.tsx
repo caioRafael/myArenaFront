@@ -1,6 +1,6 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, LandPlot, LogOut } from 'lucide-react'
+import { CalendarCheck, Home, LandPlot, LogOut } from 'lucide-react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { signOut } from 'next-auth/react'
@@ -42,6 +42,12 @@ export function SideBar(props: SideBarProps) {
       key: 'fields',
       route: 'fields',
       icon: <LandPlot />,
+    },
+    {
+      name: 'Agenda',
+      key: 'schedule',
+      route: 'schedules',
+      icon: <CalendarCheck />,
     },
   ]
 

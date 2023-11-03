@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { Button } from './ui/button'
 import {
   Sheet,
@@ -10,7 +10,7 @@ import {
 
 interface AppSheetProps {
   children: ReactNode
-  textButton: string
+  textButton: string | ReactElement
   title: string
   open: boolean
   setOpen: (value: boolean) => void
