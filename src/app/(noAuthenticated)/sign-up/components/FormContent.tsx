@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { useToast } from '@/components/ui/use-toast'
 import { useState } from 'react'
-import { arenaQueryService } from '@/services/arena/inddex'
+import { arenaQueryService } from '@/services/arena'
 import { Spin } from '@/components/Spin'
 import { useRouter } from 'next/navigation'
 

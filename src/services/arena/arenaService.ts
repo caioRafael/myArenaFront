@@ -17,8 +17,10 @@ export class ArenaService implements ResourceService<Arena, Arena> {
     throw new Error('Method not implemented.')
   }
 
-  findOne(): Promise<Arena | null> {
-    throw new Error('Method not implemented.')
+  async findOne(id: string): Promise<Arena | null> {
+    const response = await this.baseApi.getOne(`/arena/${id}`)
+
+    return response.data
   }
 
   async create(data: Arena): Promise<Arena | null> {
