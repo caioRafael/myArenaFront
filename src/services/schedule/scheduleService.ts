@@ -1,6 +1,7 @@
 import { IBaseApi } from '@/lib/api/IBaseApi'
 import { ResourceService } from '@/lib/api/ResourceService'
 import Schedule from '@/types/Schedule'
+import { api } from '@/lib/api/api'
 
 export class ScheduleService implements ResourceService<Schedule, Schedule> {
   baseApi: IBaseApi<Schedule, Schedule>
@@ -34,6 +35,12 @@ export class ScheduleService implements ResourceService<Schedule, Schedule> {
     const response = await this.baseApi.post('/schedule', data, token)
 
     return response.data as Schedule
+  }
+
+  async findTimes(fieldId: string, date: Date) {
+    const response = await api.get(`schedule/times/${fieldId}?date=${date}`)
+
+    return response.data
   }
 
   async update(): Promise<Schedule | null> {

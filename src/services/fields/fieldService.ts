@@ -20,8 +20,10 @@ export class FieldService implements ResourceService<Field, Field> {
     return response.data
   }
 
-  findOne(): Promise<Field | null> {
-    throw new Error('Method not implemented.')
+  async findOne(id: string): Promise<Field | null> {
+    const response = await this.baseApi.getOne(`/fields/${id}`)
+
+    return response.data
   }
 
   async create(data: Field, token: string): Promise<Field | null> {

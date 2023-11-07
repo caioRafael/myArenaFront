@@ -1,7 +1,11 @@
 'use client'
 
 import { AppSheet } from '@/components/AppSheet'
-import { DatePicker } from '@/components/ui/datePicker'
+import Field from '@/types/Field'
+import { convertNumberInHour } from '@/utils/convetHourInDate'
+import { useMemo, useState } from 'react'
+import { useClientContext } from '../context/ClientContext'
+import { format } from 'date-fns'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -11,35 +15,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { fieldQueryService, fieldService } from '@/services/fields'
-import { scheduleQueryService } from '@/services/schedule'
 import Schedule from '@/types/Schedule'
-import { convertHourInNumber } from '@/utils/convetHourInDate'
-import { useEffect, useMemo, useState } from 'react'
+import { scheduleQueryService } from '@/services/schedule'
 
-interface ScheduleCreateSheetProps {
-  arenaId: string
+interface ClientScheduleSheetProps {
+  field: Field
+  time: number
+  refetch: () => void
 }
 
-export function ScheduleCreateSheet(props: ScheduleCreateSheetProps) {
-  const { arenaId } = props
-  const { data } = fieldQueryService.useFindAll(arenaId)
-  const { mutateAsync } = scheduleQueryService.useCreate()
-
+export function ClientScheduleSheet(props: ClientScheduleSheetProps) {
+  const { time, field, refetch } = props
+  const { date } = useClientContext()
   const [open, setOpen] = useState<boolean>(false)
-  const [clientName, setClientName] = useState<string>('')
-  const [clientPhone, setClientPhone] = useState<string>('')
-  const [hour, setHour] = useState<string>('')
-  const [date, setDate] = useState<Date | undefined>(new Date())
   const [amount, setAmount] = useState<number>(1)
   const [sport, setSport] = useState<string>('')
-  const [fieldId, setFieldId] = useState<string>('')
+  const [clientName, setClientName] = useState<string>('')
+  const [clientPhone, setClientPhone] = useState<string>('')
+
+  const { mutateAsync } = scheduleQueryService.useCreate()
 
   const sportList = useMemo(() => {
-    const selectedField = data?.find((field) => field.id === fieldId)
-
-    return selectedField?.sports.split(',')
-  }, [fieldId, data])
+    return field.sports.split(',')
+  }, [field])
 
   const createSchedule = async () => {
     const data = {
@@ -47,24 +45,35 @@ export function ScheduleCreateSheet(props: ScheduleCreateSheetProps) {
       clientName,
       clientPhone,
       date,
-      fieldId,
-      hour: convertHourInNumber(hour),
+      fieldId: field.id as string,
+      hour: time,
       sport,
     } as Schedule
 
-    await mutateAsync(data)
-    setOpen(false)
+    const response = await mutateAsync(data)
+
+    if (response) {
+      setOpen(false)
+      refetch()
+    }
   }
   return (
     <AppSheet
       title="Agendar horário"
       open={open}
       setOpen={setOpen}
-      textButton={'Agendar novo horário'}
+      textButton={'Agendar'}
       textAction="Agendar horário"
       action={createSchedule}
     >
       <div className="flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <h1>{field.name}</h1>
+          <h1>
+            {format(date as Date, 'dd/MM')} - {convertNumberInHour(time)}
+          </h1>
+        </div>
+
         <div className="flex flex-col w-full gap-2">
           <Label>Cliente:</Label>
           <Input
@@ -81,34 +90,7 @@ export function ScheduleCreateSheet(props: ScheduleCreateSheetProps) {
             onChange={(e) => setClientPhone(e.target.value)}
           />
         </div>
-        <div className="flex flex-col w-full gap-2">
-          <Label>Quadra:</Label>
-          <Select onValueChange={(value) => setFieldId(value)} value={fieldId}>
-            <SelectTrigger>
-              <SelectValue placeholder={'Selecione uma quadra'} />
-            </SelectTrigger>
-            <SelectContent>
-              {data?.map((field) => (
-                <SelectItem key={field.id} value={field.id as string}>
-                  {field.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex flex-col w-full gap-2">
-          <Label>Data:</Label>
-          <DatePicker date={date as Date} setDate={setDate} />
-        </div>
-        <div className="flex flex-col w-full gap-2">
-          <Label>Hora:</Label>
-          <Input
-            placeholder="Abre as"
-            type="time"
-            value={hour}
-            onChange={(e) => setHour(e.target.value)}
-          />
-        </div>
+
         <div className="flex flex-col w-full gap-2">
           <Label>Quantidade de horas:</Label>
           <Input

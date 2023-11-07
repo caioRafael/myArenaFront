@@ -20,7 +20,7 @@ export function convertNumberInHour(number: number | null): string {
     const minutes = Math.round((number - hours) * 60)
     const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes
       .toString()
-      .padStart(2, '0')}`
+      .padStart(2, '0')}h`
     return formattedTime
   }
   return ''
