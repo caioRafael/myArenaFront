@@ -2,7 +2,6 @@
 
 import { Card } from '@/components/ui/card'
 import Schedule from '@/types/Schedule'
-import { format } from 'date-fns'
 import { ScheduleDetailSheet } from './ScheduleDetailSheet'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
 
