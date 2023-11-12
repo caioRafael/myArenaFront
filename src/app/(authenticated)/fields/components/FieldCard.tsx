@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import Field from '@/types/Field'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
+import { FieldDetailsSheet } from './FieldDetailsSheet'
 
 interface FieldCardProps {
   field: Field
@@ -31,7 +32,7 @@ export function FieldCard(props: FieldCardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button>Detalhar</Button>
+        <FieldDetailsSheet field={field} />
       </CardFooter>
     </Card>
   )

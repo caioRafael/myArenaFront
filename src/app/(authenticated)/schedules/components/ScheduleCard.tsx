@@ -1,7 +1,7 @@
 'use client'
 
 import { Card } from '@/components/ui/card'
-import Schedule from '@/types/Schedule'
+import Schedule, { ScheduleStatusRecord } from '@/types/Schedule'
 import { ScheduleDetailSheet } from './ScheduleDetailSheet'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
 
@@ -20,6 +20,10 @@ export function ScheduleCard(props: ScheduleCardProps) {
       <div className="flex flex-col gap-1">
         <b>Quadra:</b>
         {schedule.field?.name}
+      </div>
+      <div className="flex flex-col gap-1">
+        <b>Status:</b>
+        {ScheduleStatusRecord[schedule.status]}
       </div>
       <div className="flex flex-col gap-1">
         <b>Esporte:</b>

@@ -1,7 +1,7 @@
 'use client'
 
 import { AppSheet } from '@/components/AppSheet'
-import Schedule from '@/types/Schedule'
+import Schedule, { ScheduleStatusRecord } from '@/types/Schedule'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
 import { format } from 'date-fns'
 import { Eye } from 'lucide-react'
@@ -41,6 +41,10 @@ export function ScheduleDetailSheet(props: ScheduleDetailSheetProps) {
       <div className="flex flex-col gap-1">
         <b>Quadra:</b>
         {schedule.field?.name}
+      </div>
+      <div className="flex flex-col gap-1">
+        <b>Status:</b>
+        {ScheduleStatusRecord[schedule.status]}
       </div>
       <div className="flex flex-col gap-1">
         <b>Esporte:</b>
