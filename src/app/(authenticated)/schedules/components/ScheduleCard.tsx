@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card'
 import Schedule, { ScheduleStatusRecord } from '@/types/Schedule'
 import { ScheduleDetailSheet } from './ScheduleDetailSheet'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
+import AppMenu from '@/components/AppMenu'
+import { ScheduleStatusDialog } from './ScheduleStatusDialog'
 
 interface ScheduleCardProps {
   schedule: Schedule
@@ -11,6 +13,7 @@ interface ScheduleCardProps {
 
 export function ScheduleCard(props: ScheduleCardProps) {
   const { schedule } = props
+
   return (
     <Card className="flex flex-col gap-4 items-start justify-between p-2 pl-4 border-t-4 border-l-0 border-t-primary border-l-primary md:border-t-0 md:border-l-4 md:flex-row md:items-center">
       <div className="flex flex-col gap-1">
@@ -35,8 +38,14 @@ export function ScheduleCard(props: ScheduleCardProps) {
         {' - '}
         {convertNumberInHour(schedule.endHour as number)}
       </div>
-      <div className="flex items-center justify-center self-center w-full md:w-16 md:pr-10">
+      <div className="flex flex-col md:flex-row gap-1 items-center justify-center self-center w-full md:w-16 md:pr-10">
         <ScheduleDetailSheet schedule={schedule} />
+        <ScheduleStatusDialog
+          scheduleId={schedule.id as string}
+          currentStatus={schedule.status}
+          hour={schedule.hour}
+          endHour={schedule.endHour as number}
+        />
       </div>
     </Card>
   )

@@ -95,12 +95,39 @@ export class ResourceQueryService<Q, C> {
         }
         this.invalidateQueries()
       },
-      onError: (error: AxiosError) => {
-        const firstKey = Object.keys(error.response?.data as any)[0]
+      onError: (error: AxiosError<DataError>) => {
         if (error) {
           toast({
             title: 'Erro',
-            description: (error.response?.data as any)[firstKey],
+            description: error.response?.data.message as string,
+            variant: 'destructive',
+          })
+        }
+      },
+    })
+  }
+
+  usePatch(
+    id: string,
+    ...option: unknown[]
+  ): UseMutationResult<Partial<C> | null, AxiosError, Partial<C>> {
+    return useMutation({
+      mutationFn: (item: Partial<C>) =>
+        this.resourceService.pratialUpdate(item, id, ...option),
+      onSuccess: () => {
+        if (this.successCreateMessage !== '' && !this.hideSucessCreateMessage) {
+          toast({
+            title: 'Sucesso',
+            description: 'Item alterado com sucesso',
+          })
+        }
+        this.invalidateQueries()
+      },
+      onError: (error: AxiosError<DataError>) => {
+        if (error) {
+          toast({
+            title: 'Erro',
+            description: error.response?.data.message as string,
             variant: 'destructive',
           })
         }

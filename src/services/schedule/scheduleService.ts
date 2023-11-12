@@ -47,6 +47,15 @@ export class ScheduleService implements ResourceService<Schedule, Schedule> {
     throw new Error('Method not implemented.')
   }
 
+  async pratialUpdate(
+    data: Partial<Schedule>,
+    id: string,
+  ): Promise<Schedule | null> {
+    const response = await this.baseApi.patch(`schedule/status/${id}`, data)
+
+    return response.data
+  }
+
   async delete(): Promise<void> {
     throw new Error('Method not implemented.')
   }

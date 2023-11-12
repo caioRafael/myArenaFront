@@ -51,8 +51,8 @@ export class BaseApi<Q, C> implements IBaseApi<Q, C> {
 
   patch(
     url: string,
-    token?: string,
     data?: Record<string, unknown> | undefined,
+    token?: string,
   ): Promise<Response<C>> {
     return this.axios.patch(url, data, {
       headers: {

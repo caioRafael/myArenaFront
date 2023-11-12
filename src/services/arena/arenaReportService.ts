@@ -33,6 +33,13 @@ export class ArenaReportService implements ResourceService<Field, Field> {
     throw new Error('Method not implemented.')
   }
 
+  pratialUpdate(
+    data: Partial<Field>,
+    ...args: unknown[]
+  ): Promise<Field | null> {
+    throw new Error('Method not implemented.')
+  }
+
   async delete(): Promise<void> {
     throw new Error('Method not implemented.')
   }
