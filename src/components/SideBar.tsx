@@ -4,15 +4,17 @@ import { CalendarCheck, Home, LandPlot, LogOut, User } from 'lucide-react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { signOut } from 'next-auth/react'
+import { UserProfileEnum } from '@/types/User'
 
 interface SideBarProps {
   isMobile?: boolean
   closeSheet?: (value: boolean) => void
   arena: string
+  currentProfile: UserProfileEnum
 }
 
 export function SideBar(props: SideBarProps) {
-  const { isMobile = false, closeSheet, arena } = props
+  const { isMobile = false, closeSheet, arena, currentProfile } = props
   const pathname = usePathname()
   const currentPage = pathname.split('/')[1]
   const router = useRouter()
@@ -36,24 +38,30 @@ export function SideBar(props: SideBarProps) {
       key: 'home',
       route: 'home',
       icon: <Home />,
+      hasPermission: currentProfile !== UserProfileEnum.CLIENT,
     },
     {
       name: 'Funcionários',
       key: 'employee',
       route: 'employee',
       icon: <User />,
+      hasPermission:
+        currentProfile !== UserProfileEnum.CLIENT &&
+        currentProfile === UserProfileEnum.ADMINISTRATOR,
     },
     {
       name: 'Quadras',
       key: 'fields',
       route: 'fields',
       icon: <LandPlot />,
+      hasPermission: currentProfile !== UserProfileEnum.CLIENT,
     },
     {
       name: 'Agenda',
       key: 'schedule',
       route: 'schedules',
       icon: <CalendarCheck />,
+      hasPermission: currentProfile !== UserProfileEnum.CLIENT,
     },
   ]
 
@@ -65,20 +73,26 @@ export function SideBar(props: SideBarProps) {
     >
       <h1 className="self-center font-semibold mb-3">{arena.toUpperCase()}</h1>
 
-      {routes.map((route) => (
-        <div className="flex flex-col gap-2" key={route.key}>
-          <Button
-            key={route.key}
-            variant={currentPage === route.route ? 'default' : 'ghost'}
-            className="flex gap-2 justify-start"
-            onClick={() => goToPage(route.route)}
-          >
-            {route.icon}
-            {route.name}
-          </Button>
-          <Separator />
-        </div>
-      ))}
+      {routes.map((route) => {
+        if (route.hasPermission) {
+          return (
+            <div className="flex flex-col gap-2" key={route.key}>
+              <Button
+                key={route.key}
+                variant={currentPage === route.route ? 'default' : 'ghost'}
+                className="flex gap-2 justify-start"
+                onClick={() => goToPage(route.route)}
+              >
+                {route.icon}
+                {route.name}
+              </Button>
+              <Separator />
+            </div>
+          )
+        } else {
+          return <></>
+        }
+      })}
       <Button
         variant={'ghost'}
         className="flex gap-2 justify-start"
