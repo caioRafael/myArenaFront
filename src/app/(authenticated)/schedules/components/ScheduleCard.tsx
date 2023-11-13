@@ -4,7 +4,6 @@ import { Card } from '@/components/ui/card'
 import Schedule, { ScheduleStatusRecord } from '@/types/Schedule'
 import { ScheduleDetailSheet } from './ScheduleDetailSheet'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
-import AppMenu from '@/components/AppMenu'
 import { ScheduleStatusDialog } from './ScheduleStatusDialog'
 
 interface ScheduleCardProps {
@@ -44,7 +43,6 @@ export function ScheduleCard(props: ScheduleCardProps) {
           scheduleId={schedule.id as string}
           currentStatus={schedule.status}
           hour={schedule.hour}
-          endHour={schedule.endHour as number}
         />
       </div>
     </Card>

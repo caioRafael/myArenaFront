@@ -14,11 +14,10 @@ interface ScheduleStatusDialogProps {
   scheduleId: string
   currentStatus: ScheduleStatusEnum
   hour: number
-  endHour: number
 }
 
 export function ScheduleStatusDialog(props: ScheduleStatusDialogProps) {
-  const { scheduleId, currentStatus, endHour, hour } = props
+  const { scheduleId, currentStatus, hour } = props
   const [open, setOpen] = useState<boolean>(false)
 
   const { mutateAsync } = scheduleQueryService.usePatch(scheduleId)
@@ -35,16 +34,12 @@ export function ScheduleStatusDialog(props: ScheduleStatusDialogProps) {
 
   const disabled = useMemo(() => {
     const currentHour = new Date().getHours()
-    console.log(hour)
-    console.log(currentHour)
     if (currentStatus === ScheduleStatusEnum.APPROVED && currentHour < hour) {
       return true
     } else {
       return false
     }
-  }, [hour])
-
-  console.log(disabled)
+  }, [hour, currentStatus])
 
   const ContentButton = () => (
     <>

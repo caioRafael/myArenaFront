@@ -1,6 +1,6 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
-import { CalendarCheck, Home, LandPlot, LogOut } from 'lucide-react'
+import { CalendarCheck, Home, LandPlot, LogOut, User } from 'lucide-react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { signOut } from 'next-auth/react'
@@ -36,6 +36,12 @@ export function SideBar(props: SideBarProps) {
       key: 'home',
       route: 'home',
       icon: <Home />,
+    },
+    {
+      name: 'Funcionários',
+      key: 'employee',
+      route: 'employee',
+      icon: <User />,
     },
     {
       name: 'Quadras',
