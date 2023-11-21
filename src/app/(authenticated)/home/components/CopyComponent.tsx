@@ -11,7 +11,7 @@ interface CopyComponentProps {
 export function CopyComponent(props: CopyComponentProps) {
   const { arenaId } = props
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/${arenaId}`)
+    navigator.clipboard.writeText(`http://localhost:3000/client/${arenaId}`)
     toast({
       title: 'Link copiado',
       description: 'Link de agendamento copiado com sucesso!',
