@@ -1,29 +1,25 @@
 'use client'
 
 import { queryClient } from '@/providers/QueryProvider'
-import { scheduleService } from '@/services/schedule'
-import { useQuery } from '@tanstack/react-query'
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from 'react'
+import { ReactNode, createContext, useContext, useState } from 'react'
 
 interface ClientContextProviderProps {
   children: ReactNode
+  clientIsAuthenticated: boolean
 }
 
 interface ClientContextType {
   date: Date | undefined
   setDate: (value: Date | undefined) => void
+  clientIsAuthenticated: boolean
 }
 
 const ClientContext = createContext<ClientContextType | undefined>(undefined)
 
-function ClientContextProvider({ children }: ClientContextProviderProps) {
+function ClientContextProvider({
+  children,
+  clientIsAuthenticated,
+}: ClientContextProviderProps) {
   const currentDate = new Date().setHours(0, 0, 0, 0)
   const [date, setDate] = useState<Date | undefined>(new Date(currentDate))
 
@@ -33,7 +29,9 @@ function ClientContextProvider({ children }: ClientContextProviderProps) {
   }
 
   return (
-    <ClientContext.Provider value={{ date, setDate: updateDate }}>
+    <ClientContext.Provider
+      value={{ date, setDate: updateDate, clientIsAuthenticated }}
+    >
       {children}
     </ClientContext.Provider>
   )

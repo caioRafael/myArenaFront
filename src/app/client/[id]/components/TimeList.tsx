@@ -8,6 +8,7 @@ import { convertNumberInHour } from '@/utils/convetHourInDate'
 import { useEffect } from 'react'
 import { ClientScheduleSheet } from './ClientScheduleSheet'
 import Field from '@/types/Field'
+import { ClientRedirextLoginDialog } from './ClientRedirextLoginDialog'
 
 interface TimeListProps {
   fieldId: string
@@ -16,7 +17,7 @@ interface TimeListProps {
 
 export function TimeList(props: TimeListProps) {
   const { fieldId, field } = props
-  const { date } = useClientContext()
+  const { date, clientIsAuthenticated } = useClientContext()
   const { data, isLoading, refetch } = useFindTime(fieldId, date as Date)
 
   const handleRefetch = () => {
@@ -37,11 +38,15 @@ export function TimeList(props: TimeListProps) {
             key={time}
           >
             <h1>{convertNumberInHour(time)}</h1>
-            <ClientScheduleSheet
-              time={time}
-              field={field}
-              refetch={handleRefetch}
-            />
+            {clientIsAuthenticated ? (
+              <ClientScheduleSheet
+                time={time}
+                field={field}
+                refetch={handleRefetch}
+              />
+            ) : (
+              <ClientRedirextLoginDialog />
+            )}
           </div>
         ))}
     </div>

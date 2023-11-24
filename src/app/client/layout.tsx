@@ -1,4 +1,4 @@
-import Link from 'next/link'
+// import Link from 'next/link'
 import { ReactNode } from 'react'
 
 interface AppLayoutProps {
@@ -13,7 +13,7 @@ export default async function ClientLayout({ children }: AppLayoutProps) {
           <span className="text-white">My</span> Arena
         </h1>
 
-        <Link href={'/'}>Login</Link>
+        {/* <Link href={'/'}>Login</Link> */}
       </header>
       <div className="w-full h-page">{children}</div>
     </main>
