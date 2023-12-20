@@ -7,8 +7,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import Link from 'next/link'
+import { useClientContext } from '../context/ClientContext'
 
 export function ClientRedirextLoginDialog() {
+  const { arenaId } = useClientContext()
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -23,13 +25,13 @@ export function ClientRedirextLoginDialog() {
         </div>
         <DialogFooter className="flex flex-wrap gap-3">
           <Link
-            href={'/'}
+            href={`/?redirectTo=${arenaId}`}
             className="flex items-center justify-center h-10 bg-primary p-4 font-semibold text-white rounded-md"
           >
             Realizar login
           </Link>
           <Link
-            href={'sign-up'}
+            href={`sign-up/?redirectTo=${arenaId}`}
             className="flex items-center justify-center h-10 border border-primary p-4 font-semibold text-primary rounded-md"
           >
             Criar conta

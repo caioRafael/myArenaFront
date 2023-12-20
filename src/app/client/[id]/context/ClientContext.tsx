@@ -6,12 +6,14 @@ import { ReactNode, createContext, useContext, useState } from 'react'
 interface ClientContextProviderProps {
   children: ReactNode
   clientIsAuthenticated: boolean
+  arenaId: string
 }
 
 interface ClientContextType {
   date: Date | undefined
   setDate: (value: Date | undefined) => void
   clientIsAuthenticated: boolean
+  arenaId: string
 }
 
 const ClientContext = createContext<ClientContextType | undefined>(undefined)
@@ -19,6 +21,7 @@ const ClientContext = createContext<ClientContextType | undefined>(undefined)
 function ClientContextProvider({
   children,
   clientIsAuthenticated,
+  arenaId,
 }: ClientContextProviderProps) {
   const currentDate = new Date().setHours(0, 0, 0, 0)
   const [date, setDate] = useState<Date | undefined>(new Date(currentDate))
@@ -30,7 +33,7 @@ function ClientContextProvider({
 
   return (
     <ClientContext.Provider
-      value={{ date, setDate: updateDate, clientIsAuthenticated }}
+      value={{ date, setDate: updateDate, clientIsAuthenticated, arenaId }}
     >
       {children}
     </ClientContext.Provider>

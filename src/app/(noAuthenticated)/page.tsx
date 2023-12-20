@@ -3,15 +3,21 @@ import { LoginFormContainer } from './components/LoginFormContainer'
 
 interface LoginPageProps {
   searchParams?: {
-    arenaId?: string
+    redirectTo?: string
   }
 }
 
 export default function LoginPage(props: LoginPageProps) {
   const { searchParams } = props
+
+  // console.log(
+  //   searchParams?.redirectTo === undefined
+  //     ? 'sign-up'
+  //     : `client/sign-up/?arenaId=${searchParams?.redirectTo}`,
+  // )
   return (
     <>
-      {searchParams?.arenaId && (
+      {searchParams?.redirectTo && (
         <h1 className="text-red-500">
           Antes de fazer um agendamento faça seu login
         </h1>
@@ -20,10 +26,14 @@ export default function LoginPage(props: LoginPageProps) {
       <p>
         Não tem conta?{' '}
         <Link
-          href={'sign-up'}
+          href={
+            searchParams?.redirectTo !== undefined
+              ? 'sign-up'
+              : `client/sign-up/?arenaId=${searchParams?.redirectTo}`
+          }
           className="underline hover:text-primary transition-all"
         >
-          cadastre sua arena
+          cadastre sua arena 123
         </Link>
       </p>
     </>

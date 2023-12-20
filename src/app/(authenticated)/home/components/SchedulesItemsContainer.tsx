@@ -2,6 +2,7 @@
 import { scheduleQueryService } from '@/services/schedule'
 import { ScheduleCard } from '../../schedules/components/ScheduleCard'
 import { EmptyState } from '@/components/EmptyState'
+import useWebSocket from '@/lib/socket'
 
 interface SchedulesItemsContainerProps {
   arenaId: string
@@ -16,6 +17,9 @@ export function SchedulesItemsContainer(props: SchedulesItemsContainerProps) {
     new Date(currentDate),
     token,
   )
+  useWebSocket('findSchedules', scheduleQueryService)
+
+  // const socket = io('http://localhost:3333')
 
   if (data?.length === 0)
     return <EmptyState message="Nenhum agendamento nessa data" />
