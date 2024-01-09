@@ -1,5 +1,4 @@
 'use client'
-import { Button } from '@/components/ui/button'
 import { useClientContext } from '../context/ClientContext'
 import { useQuery } from '@tanstack/react-query'
 import { scheduleService } from '@/services/schedule'

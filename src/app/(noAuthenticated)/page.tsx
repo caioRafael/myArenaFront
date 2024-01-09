@@ -10,14 +10,11 @@ interface LoginPageProps {
 export default function LoginPage(props: LoginPageProps) {
   const { searchParams } = props
 
-  // console.log(
-  //   searchParams?.redirectTo === undefined
-  //     ? 'sign-up'
-  //     : `client/sign-up/?arenaId=${searchParams?.redirectTo}`,
-  // )
+  const isClient = !!searchParams?.redirectTo
+
   return (
     <>
-      {searchParams?.redirectTo && (
+      {isClient && (
         <h1 className="text-red-500">
           Antes de fazer um agendamento faça seu login
         </h1>
@@ -27,13 +24,13 @@ export default function LoginPage(props: LoginPageProps) {
         Não tem conta?{' '}
         <Link
           href={
-            searchParams?.redirectTo !== undefined
-              ? 'sign-up'
-              : `client/sign-up/?arenaId=${searchParams?.redirectTo}`
+            isClient
+              ? `client/sign-up/?redirectTo=${searchParams?.redirectTo}`
+              : 'sign-up'
           }
           className="underline hover:text-primary transition-all"
         >
-          cadastre sua arena 123
+          {isClient ? 'crie uma conta' : 'cadastre sua arena'}
         </Link>
       </p>
     </>

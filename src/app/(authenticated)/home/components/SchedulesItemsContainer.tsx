@@ -19,8 +19,6 @@ export function SchedulesItemsContainer(props: SchedulesItemsContainerProps) {
   )
   useWebSocket('findSchedules', scheduleQueryService)
 
-  // const socket = io('http://localhost:3333')
-
   if (data?.length === 0)
     return <EmptyState message="Nenhum agendamento nessa data" />
   return (
