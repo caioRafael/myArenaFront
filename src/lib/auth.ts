@@ -28,25 +28,3 @@ export async function getUser() {
 
   return user
 }
-
-export async function controlClientRoutes(arenaId?: string) {
-  const session = await getServerSession(nextAuthOptions)
-
-  if (!session) {
-    if (arenaId) {
-      redirect(`/client/${arenaId}`)
-    }
-
-    redirect('/?isClient=true')
-  }
-
-  const decodedToken: DecodedTokenReturn = jwtDecode(session.access_token)
-
-  console.log(decodedToken)
-  // const { data } = await api.get(`user/${decodedToken.sub}`)
-
-  return {
-    token: session.access_token as string,
-    ...decodedToken,
-  }
-}

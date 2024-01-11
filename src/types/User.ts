@@ -1,3 +1,5 @@
+import Arena from './Arena'
+import DecodedTokenReturn from './DecodedTokenReturn'
 import Entity from './Entity'
 
 export enum UserProfileEnum {
@@ -21,4 +23,10 @@ export default interface User extends Entity {
   prorfile?: string
   avatar?: string
   arenaId?: string
+}
+
+export interface CurrentUser extends DecodedTokenReturn {
+  token: string
+  id: string
+  arena?: Arena
 }

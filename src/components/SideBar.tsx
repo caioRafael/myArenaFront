@@ -9,7 +9,7 @@ import { UserProfileEnum } from '@/types/User'
 interface SideBarProps {
   isMobile?: boolean
   closeSheet?: (value: boolean) => void
-  arena: string
+  arena: string | undefined
   currentProfile: UserProfileEnum
 }
 
@@ -71,7 +71,7 @@ export function SideBar(props: SideBarProps) {
         isMobile ? 'hidden' : 'flex'
       } flex-col flex-1 px-4 py-10 gap-2 border-r`}
     >
-      <h1 className="self-center font-semibold mb-3">{arena.toUpperCase()}</h1>
+      <h1 className="self-center font-semibold mb-3">{arena?.toUpperCase()}</h1>
 
       {routes.map((route) => {
         if (route.hasPermission) {
