@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { arenaQueryService } from '@/services/arena'
 import { Spin } from '@/components/Spin'
 import { useRouter } from 'next/navigation'
+import { Checkbox } from '@/components/ui/checkbox'
 
 export function FormContent() {
   const { toast } = useToast()
@@ -21,6 +22,8 @@ export function FormContent() {
   const [cnpj, setCnpj] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
+  const [pixKey, setPixKey] = useState('')
+  const [requirePrePayment, setRequirePrePayment] = useState<boolean>(false)
 
   // States for stage 2 fields
   const [name, setName] = useState('')
@@ -48,6 +51,8 @@ export function FormContent() {
       cnpj,
       phone,
       address,
+      pixKey,
+      requirePrePayment,
       administrator: {
         name,
         nickname,
@@ -116,6 +121,32 @@ export function FormContent() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
+          </div>
+          <div className="flex flex-col w-full gap-2">
+            <Label>Chave pix</Label>
+            <Input
+              placeholder="chave pix"
+              type="text"
+              value={pixKey}
+              onChange={(e) => setPixKey(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="terms"
+              checked={requirePrePayment}
+              onCheckedChange={(value) =>
+                setRequirePrePayment(value as boolean)
+              }
+            />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Exigência de pagamento adiantado (Ao marcar essa opção, o
+              estabelecimento exige que o cliente pague metade do valor do
+              agendamento de forma antecipada)
+            </label>
           </div>
           <Button onClick={() => setStage(2)}>Próximo</Button>
         </>
