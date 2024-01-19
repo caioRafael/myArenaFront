@@ -6,14 +6,16 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from './ui/sheet'
 import { Menu } from 'lucide-react'
+import { UserProfileEnum } from '@/types/User'
 
 interface MobileSidbarProps {
   username: string
   arena: string
+  currentProfile: UserProfileEnum
 }
 
 export function MobileSidbar(props: MobileSidbarProps) {
-  const { username, arena } = props
+  const { username, arena, currentProfile } = props
   const [open, setOpen] = useState<boolean>(false)
 
   const initalsName = username.split(' ') as string[]
@@ -37,7 +39,12 @@ export function MobileSidbar(props: MobileSidbarProps) {
             <h1 className=" font-semibold">{username.toUpperCase()}</h1>
           </div>
         </SheetHeader>
-        <SideBar isMobile closeSheet={setOpen} arena={arena} />
+        <SideBar
+          isMobile
+          closeSheet={setOpen}
+          arena={arena}
+          currentProfile={currentProfile}
+        />
       </SheetContent>
     </Sheet>
   )

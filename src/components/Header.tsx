@@ -1,6 +1,8 @@
-import { getUser } from '@/lib/auth'
+import { getUser } from '@/lib/newAuth'
 import { MobileSidbar } from './MobileSidbar'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import TypeRouteEnum from '@/types/enum/TypeRouteEnum'
+import { redirect } from 'next/navigation'
 
 interface HeaderProps {
   username: string
@@ -8,12 +10,22 @@ interface HeaderProps {
 
 export async function Header(props: HeaderProps) {
   const { username } = props
-  const { arena } = await getUser()
+  const user = await getUser(TypeRouteEnum.ARENA_ROUTE)
+
+  if (!user) {
+    redirect('/')
+  }
+
+  const { arena, profile } = user
 
   const initalsName = username.split(' ') as string[]
   return (
     <div className="w-full h-20 flex items-center justify-between p-4 border-b border-border bg-primary">
-      <MobileSidbar username={username} arena={arena.fantasyName} />
+      <MobileSidbar
+        username={username}
+        arena={arena?.fantasyName as string}
+        currentProfile={profile}
+      />
 
       <h1 className="font-semibold text-3xl">
         <span className="text-white">My</span> Arena
