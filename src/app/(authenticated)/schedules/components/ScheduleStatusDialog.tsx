@@ -23,7 +23,6 @@ export function ScheduleStatusDialog(props: ScheduleStatusDialogProps) {
   const { mutateAsync } = scheduleQueryService.usePatch(scheduleId)
 
   const handleUpdateStatus = async () => {
-    console.log(nextScheduleStatus(currentStatus))
     const data = {
       status: nextScheduleStatus(currentStatus),
     } as Partial<Schedule>

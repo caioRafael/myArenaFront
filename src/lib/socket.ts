@@ -1,16 +1,17 @@
 import { io } from 'socket.io-client'
 import { ResourceQueryService } from './api/ResourceQueryService'
 import { useEffect } from 'react'
+import { BASE_URL } from './api/api'
 
-const socket = io('http://localhost:3333')
+const socket = io(BASE_URL + '')
 
 export default function useWebSocket<T>(
   key: string,
   queryService: ResourceQueryService<T, T>,
 ) {
+  console.log(BASE_URL)
   useEffect(() => {
     socket.on(key, (event) => {
-      console.log(event)
       if (event !== null) {
         queryService.invalidateQueries()
       }

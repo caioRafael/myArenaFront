@@ -16,7 +16,7 @@ export default async function AppLayout({ children }: AppLayoutProps) {
   if (!user) {
     redirect('/')
   }
-
+  console.log(process.env.API_URL)
   const { username, arena, profile } = user
   return (
     <main className="flex flex-col  w-screen h-screen">
