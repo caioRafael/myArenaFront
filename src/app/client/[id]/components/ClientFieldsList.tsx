@@ -30,7 +30,7 @@ export function ClientFieldsList(props: ClientFieldsListProps) {
 
   return (
     <div className="flex flex-col gap-4 w-full px-10">
-      <Accordion type="single">
+      <Accordion type="single" collapsible>
         {dataField &&
           dataField?.map((field) => (
             <AccordionItem key={field.id} value={field.id as string}>

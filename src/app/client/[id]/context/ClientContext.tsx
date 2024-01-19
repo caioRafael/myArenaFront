@@ -1,12 +1,14 @@
 'use client'
 
 import { queryClient } from '@/providers/QueryProvider'
+import { CurrentUser } from '@/types/User'
 import { ReactNode, createContext, useContext, useState } from 'react'
 
 interface ClientContextProviderProps {
   children: ReactNode
   clientIsAuthenticated: boolean
   arenaId: string
+  user: CurrentUser | null
 }
 
 interface ClientContextType {
@@ -14,6 +16,7 @@ interface ClientContextType {
   setDate: (value: Date | undefined) => void
   clientIsAuthenticated: boolean
   arenaId: string
+  user: CurrentUser | undefined
 }
 
 const ClientContext = createContext<ClientContextType | undefined>(undefined)
@@ -22,6 +25,7 @@ function ClientContextProvider({
   children,
   clientIsAuthenticated,
   arenaId,
+  user,
 }: ClientContextProviderProps) {
   const currentDate = new Date().setHours(0, 0, 0, 0)
   const [date, setDate] = useState<Date | undefined>(new Date(currentDate))
@@ -33,7 +37,13 @@ function ClientContextProvider({
 
   return (
     <ClientContext.Provider
-      value={{ date, setDate: updateDate, clientIsAuthenticated, arenaId }}
+      value={{
+        date,
+        setDate: updateDate,
+        clientIsAuthenticated,
+        arenaId,
+        user: user || undefined,
+      }}
     >
       {children}
     </ClientContext.Provider>

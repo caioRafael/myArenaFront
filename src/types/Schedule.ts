@@ -1,5 +1,6 @@
 import Entity from './Entity'
 import Field from './Field'
+import User from './User'
 
 export enum ScheduleStatusEnum {
   DOWN_PAYMENT = 'DOWN_PAYMENT',
@@ -21,11 +22,12 @@ export const ScheduleStatusRecord: Record<ScheduleStatusEnum, string> = {
 
 export default interface Schedule extends Entity {
   date: Date
+  userId: string
+  user?: User
   hour: number
   endHour?: number
   amountHours: number
-  clientName: string
-  clientPhone: string
+  code: string
   sport: string
   fieldId: string
   field?: Field

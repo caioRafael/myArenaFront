@@ -46,7 +46,7 @@ export function AppSheet(props: AppSheetProps) {
       <SheetContent>
         <SheetHeader className="mb-10">{title}</SheetHeader>
         {children}
-        <SheetFooter className="mt-10">
+        <SheetFooter className="mt-10 gap-2">
           <Button variant={'outline'} onClick={() => setOpen(false)}>
             Fechar
           </Button>

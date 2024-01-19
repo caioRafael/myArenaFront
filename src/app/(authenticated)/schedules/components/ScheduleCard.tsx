@@ -17,7 +17,11 @@ export function ScheduleCard(props: ScheduleCardProps) {
     <Card className="flex flex-col gap-4 items-start justify-between p-2 pl-4 border-t-4 border-l-0 border-t-primary border-l-primary md:border-t-0 md:border-l-4 md:flex-row md:items-center">
       <div className="flex flex-col gap-1">
         <b>Cliente:</b>
-        {schedule.clientName}
+        {schedule.user?.nickname}
+      </div>
+      <div className="flex flex-col gap-1">
+        <b>Código:</b>
+        {schedule.code}
       </div>
       <div className="flex flex-col gap-1">
         <b>Quadra:</b>

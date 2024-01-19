@@ -20,6 +20,7 @@ export function EmployeeCreateSheet(props: EmployeeCreateSheetProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [phone, setPhone] = useState<string>('')
 
   const { mutateAsync } = userQueryService.useCreate()
 
@@ -36,6 +37,7 @@ export function EmployeeCreateSheet(props: EmployeeCreateSheetProps) {
       name,
       nickname,
       email,
+      phone,
       password,
       profile: UserProfileEnum.EMPLOYEE,
       arenaId,
@@ -72,6 +74,15 @@ export function EmployeeCreateSheet(props: EmployeeCreateSheetProps) {
             type="text"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col w-full gap-2">
+          <Label>Telefone</Label>
+          <Input
+            placeholder="Telefone"
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
         </div>
         <div className="flex flex-col w-full gap-2">

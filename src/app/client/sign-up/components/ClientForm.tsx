@@ -22,6 +22,7 @@ export default function ClientForm(props: ClientFormProps) {
 
   const [name, setName] = useState<string>('')
   const [nickname, setNickname] = useState<string>('')
+  const [phone, setPhone] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
@@ -39,6 +40,7 @@ export default function ClientForm(props: ClientFormProps) {
     const data = {
       name,
       nickname,
+      phone,
       email,
       password,
       profile: UserProfileEnum.CLIENT,
@@ -77,6 +79,15 @@ export default function ClientForm(props: ClientFormProps) {
           type="text"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
+        />
+      </div>
+      <div className="flex flex-col w-full gap-2">
+        <Label>Telefone </Label>
+        <Input
+          placeholder="Telefone"
+          type="text"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
       </div>
       <div className="flex flex-col w-full gap-2">

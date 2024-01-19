@@ -11,11 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { fieldQueryService, fieldService } from '@/services/fields'
+import { fieldQueryService } from '@/services/fields'
 import { scheduleQueryService } from '@/services/schedule'
 import Schedule from '@/types/Schedule'
 import { convertHourInNumber } from '@/utils/convetHourInDate'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 interface ScheduleCreateSheetProps {
   arenaId: string
@@ -44,8 +44,9 @@ export function ScheduleCreateSheet(props: ScheduleCreateSheetProps) {
   const createSchedule = async () => {
     const data = {
       amountHours: amount,
-      clientName,
-      clientPhone,
+      // clientName,
+      // clientPhone,
+      userId: '',
       date,
       fieldId,
       hour: convertHourInNumber(hour),

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { scheduleService } from '@/services/schedule'
 import { Spin } from '@/components/Spin'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
-import { useEffect } from 'react'
+import { use, useEffect } from 'react'
 import { ClientScheduleSheet } from './ClientScheduleSheet'
 import Field from '@/types/Field'
 import { ClientRedirextLoginDialog } from './ClientRedirextLoginDialog'
@@ -16,7 +16,7 @@ interface TimeListProps {
 
 export function TimeList(props: TimeListProps) {
   const { fieldId, field } = props
-  const { date, clientIsAuthenticated } = useClientContext()
+  const { date, clientIsAuthenticated, user } = useClientContext()
   const { data, isLoading, refetch } = useFindTime(fieldId, date as Date)
 
   const handleRefetch = () => {
@@ -37,11 +37,12 @@ export function TimeList(props: TimeListProps) {
             key={time}
           >
             <h1>{convertNumberInHour(time)}</h1>
-            {clientIsAuthenticated ? (
+            {clientIsAuthenticated && user ? (
               <ClientScheduleSheet
                 time={time}
                 field={field}
                 refetch={handleRefetch}
+                user={user}
               />
             ) : (
               <ClientRedirextLoginDialog />

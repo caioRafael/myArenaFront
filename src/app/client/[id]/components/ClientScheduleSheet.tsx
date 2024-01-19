@@ -17,23 +17,23 @@ import {
 } from '@/components/ui/select'
 import Schedule from '@/types/Schedule'
 import { scheduleQueryService } from '@/services/schedule'
+import { CurrentUser } from '@/types/User'
 
 interface ClientScheduleSheetProps {
   field: Field
   time: number
   refetch: () => void
+  user: CurrentUser
 }
 
 export function ClientScheduleSheet(props: ClientScheduleSheetProps) {
-  const { time, field, refetch } = props
+  const { time, field, refetch, user } = props
   const { date } = useClientContext()
   const [open, setOpen] = useState<boolean>(false)
   const [amount, setAmount] = useState<number>(1)
   const [sport, setSport] = useState<string>('')
-  const [clientName, setClientName] = useState<string>('')
-  const [clientPhone, setClientPhone] = useState<string>('')
 
-  const { mutateAsync } = scheduleQueryService.useCreate()
+  const { mutateAsync } = scheduleQueryService.useCreate(user.token)
 
   const sportList = useMemo(() => {
     return field.sports.split(',')
@@ -42,8 +42,7 @@ export function ClientScheduleSheet(props: ClientScheduleSheetProps) {
   const createSchedule = async () => {
     const data = {
       amountHours: amount,
-      clientName,
-      clientPhone,
+      userId: user.id,
       date,
       fieldId: field.id as string,
       hour: time,
@@ -76,19 +75,7 @@ export function ClientScheduleSheet(props: ClientScheduleSheetProps) {
 
         <div className="flex flex-col w-full gap-2">
           <Label>Cliente:</Label>
-          <Input
-            placeholder="Nome"
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col w-full gap-2">
-          <Label>Telefone:</Label>
-          <Input
-            placeholder="Telefone"
-            value={clientPhone}
-            onChange={(e) => setClientPhone(e.target.value)}
-          />
+          <h1>{user.username}</h1>
         </div>
 
         <div className="flex flex-col w-full gap-2">

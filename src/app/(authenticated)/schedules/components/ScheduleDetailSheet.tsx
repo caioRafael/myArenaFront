@@ -31,12 +31,16 @@ export function ScheduleDetailSheet(props: ScheduleDetailSheetProps) {
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-col gap-1">
           <b>Cliente:</b>
-          {schedule.clientName}
+          {schedule.user?.nickname}
         </div>
         <div className="flex flex-col gap-1">
           <b>Telefone:</b>
-          {schedule.clientPhone}
+          {schedule.user?.phone}
         </div>
+      </div>
+      <div className="flex flex-col gap-1">
+        <b>Código:</b>
+        {schedule.code}
       </div>
       <div className="flex flex-col gap-1">
         <b>Quadra:</b>

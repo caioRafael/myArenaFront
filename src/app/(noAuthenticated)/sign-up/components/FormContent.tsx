@@ -26,6 +26,7 @@ export function FormContent() {
   const [name, setName] = useState('')
   const [nickname, setNickname] = useState('')
   const [email, setEmail] = useState('')
+  const [userPhone, setUserPhone] = useState<string>('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -50,6 +51,7 @@ export function FormContent() {
       administrator: {
         name,
         nickname,
+        phone: userPhone,
         email,
         password,
       },
@@ -98,9 +100,9 @@ export function FormContent() {
             />
           </div>
           <div className="flex flex-col w-full gap-2">
-            <Label>Telefone</Label>
+            <Label>Telefone da empresa (Wathsapp)</Label>
             <Input
-              placeholder="Telefone"
+              placeholder="Telefone (Wathsapp)"
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -136,6 +138,15 @@ export function FormContent() {
               type="text"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col w-full gap-2">
+            <Label>Telefone do administrador</Label>
+            <Input
+              placeholder="Telefone"
+              type="text"
+              value={userPhone}
+              onChange={(e) => setUserPhone(e.target.value)}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
