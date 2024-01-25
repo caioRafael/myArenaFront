@@ -3,7 +3,7 @@ import { CopyComponent } from './components/CopyComponent'
 import { getUser } from '@/lib/auth'
 import { Card } from '@/components/ui/card'
 import { SchedulesItemsContainer } from './components/SchedulesItemsContainer'
-import { Separator } from '@/components/ui/separator'
+// import { Separator } from '@/components/ui/separator'
 import { ReportContainer } from './components/ReportContainer'
 import { UserProfileEnum } from '@/types/User'
 
@@ -24,7 +24,7 @@ export default async function Home() {
       {profile === UserProfileEnum.ADMINISTRATOR && (
         <ReportContainer arenaId={arena.id as string} token={token} />
       )}
-      <Separator className="h-1" />
+      {/* <Separator className="h-1" /> */}
       <h1 className="text-lg font-semibold">Agendamentos do dia:</h1>
       <SchedulesItemsContainer arenaId={arena.id as string} token={token} />
     </AppPage>

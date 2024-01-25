@@ -1,42 +1,44 @@
 import { IBaseApi } from '@/lib/api/IBaseApi'
 import { ResourceService } from '@/lib/api/ResourceService'
-import Field from '@/types/Field'
+import { ArenaReport } from '.'
 
-export class ArenaReportService implements ResourceService<Field, Field> {
-  baseApi: IBaseApi<Field, Field>
+export class ArenaReportService
+  implements ResourceService<ArenaReport, ArenaReport>
+{
+  baseApi: IBaseApi<ArenaReport, ArenaReport>
 
-  constructor(baseApi: IBaseApi<Field, Field>) {
+  constructor(baseApi: IBaseApi<ArenaReport, ArenaReport>) {
     this.baseApi = baseApi
   }
 
-  findQuery(): Promise<Field[]> {
+  findQuery(): Promise<ArenaReport[]> {
     throw new Error('Method not implemented.')
   }
 
-  async findAll(id: string, token: string): Promise<Field[]> {
+  async findAll(id: string, token: string): Promise<ArenaReport[]> {
     const response = await this.baseApi.getAll(`/arena/report/${id}`, token)
 
     return response.data
   }
 
-  async findOne(id: string, token: string): Promise<Field | null> {
+  async findOne(id: string, token: string): Promise<ArenaReport | null> {
     const response = await this.baseApi.getOne(`/arena/report/${id}`, token)
 
     return response.data
   }
 
-  async create(): Promise<Field | null> {
+  async create(): Promise<ArenaReport | null> {
     throw new Error('Method not implemented.')
   }
 
-  async update(): Promise<Field | null> {
+  async update(): Promise<ArenaReport | null> {
     throw new Error('Method not implemented.')
   }
 
   pratialUpdate(
-    data: Partial<Field>,
+    data: Partial<ArenaReport>,
     ...args: unknown[]
-  ): Promise<Field | null> {
+  ): Promise<ArenaReport | null> {
     throw new Error('Method not implemented.')
   }
 
@@ -44,19 +46,19 @@ export class ArenaReportService implements ResourceService<Field, Field> {
     throw new Error('Method not implemented.')
   }
 
-  async changeSituation(): Promise<Field | null> {
+  async changeSituation(): Promise<ArenaReport | null> {
     throw new Error('Method not implemented.')
   }
 
-  async comment(): Promise<Field | null> {
+  async comment(): Promise<ArenaReport | null> {
     throw new Error('Method not implemented.')
   }
 
-  queryToCommand(executionTest: Field): Field {
+  queryToCommand(executionTest: ArenaReport): ArenaReport {
     return executionTest
   }
 
-  commandToQuery(executionTest: Field): Field {
+  commandToQuery(executionTest: ArenaReport): ArenaReport {
     return executionTest
   }
 }

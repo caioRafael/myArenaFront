@@ -19,8 +19,10 @@ export class UserService implements ResourceService<User, User> {
     return response.data
   }
 
-  findOne(): Promise<User | null> {
-    throw new Error('Method not implemented.')
+  async findOne(userId: string, token: string): Promise<User | null> {
+    const response = await this.baseApi.getOne(`/user/${userId}`, token)
+
+    return response.data
   }
 
   async create(data: User): Promise<User | null> {

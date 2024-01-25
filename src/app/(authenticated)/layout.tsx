@@ -3,7 +3,6 @@ import { SideBar } from '@/components/SideBar'
 import { getUser } from '@/lib/newAuth'
 import TypeRouteEnum from '@/types/enum/TypeRouteEnum'
 import { redirect } from 'next/navigation'
-// import { getUser } from '@/lib/auth'
 import { ReactNode } from 'react'
 
 interface AppLayoutProps {
@@ -16,7 +15,6 @@ export default async function AppLayout({ children }: AppLayoutProps) {
   if (!user) {
     redirect('/')
   }
-  console.log(process.env.API_URL)
   const { username, arena, profile } = user
   return (
     <main className="flex flex-col  w-screen h-screen">
