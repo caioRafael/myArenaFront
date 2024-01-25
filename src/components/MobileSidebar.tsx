@@ -8,13 +8,13 @@ import { Sheet, SheetContent, SheetHeader, SheetTrigger } from './ui/sheet'
 import { Menu } from 'lucide-react'
 import { UserProfileEnum } from '@/types/User'
 
-interface MobileSidbarProps {
+interface MobileSidebarProps {
   username: string
   arena: string
   currentProfile: UserProfileEnum
 }
 
-export function MobileSidbar(props: MobileSidbarProps) {
+export function MobileSidebar(props: MobileSidebarProps) {
   const { username, arena, currentProfile } = props
   const [open, setOpen] = useState<boolean>(false)
 

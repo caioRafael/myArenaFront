@@ -34,7 +34,7 @@ export function SideBar(props: SideBarProps) {
 
   const routes = [
     {
-      name: 'Inicio',
+      name: 'Início',
       key: 'home',
       route: 'home',
       icon: <Home />,

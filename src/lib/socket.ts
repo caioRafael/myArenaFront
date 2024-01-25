@@ -9,7 +9,6 @@ export default function useWebSocket<T>(
   key: string,
   queryService: ResourceQueryService<T, T>,
 ) {
-  console.log(BASE_URL)
   useEffect(() => {
     socket.on(key, (event) => {
       if (event !== null) {

@@ -23,6 +23,7 @@ export default interface User extends Entity {
   prorfile?: string
   avatar?: string
   arenaId?: string
+  createdAt?: string
 }
 
 export interface CurrentUser extends DecodedTokenReturn {
