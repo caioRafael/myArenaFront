@@ -99,7 +99,7 @@ export function FieldSheetCreate(props: FieldSheetCreateProps) {
         </div>
 
         <div className="flex flex-col w-full gap-2">
-          <Label>Abre as:</Label>
+          <Label>Abre às:</Label>
           <Input
             placeholder="Abre as"
             type="time"
@@ -109,7 +109,7 @@ export function FieldSheetCreate(props: FieldSheetCreateProps) {
         </div>
 
         <div className="flex flex-col w-full gap-2">
-          <Label>Fecha as:</Label>
+          <Label>Fecha às:</Label>
           <Input
             placeholder="Fecha as"
             type="time"
@@ -122,7 +122,7 @@ export function FieldSheetCreate(props: FieldSheetCreateProps) {
           <Label>Esportes:</Label>
           <div className="flex gap-2">
             <Input
-              placeholder="Esprtes"
+              placeholder="Esportes"
               type="text"
               value={currentSport}
               onChange={(e) => setCurrentSport(e.target.value)}

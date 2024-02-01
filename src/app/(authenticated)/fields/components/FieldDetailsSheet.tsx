@@ -24,7 +24,7 @@ export function FieldDetailsSheet(props: FieldDetailsSheetProps) {
         {field.price}
       </div>
       <div>
-        <h1>Horarios:</h1>
+        <h1>Horários:</h1>
         {convertNumberInHour(field.openIn)} -{' '}
         {convertNumberInHour(field.closeIn)}
       </div>
