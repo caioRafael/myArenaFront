@@ -26,7 +26,13 @@ export function SchedulesItemsContainer(props: SchedulesItemsContainerProps) {
       {data &&
         data.map((schedule, index) => {
           if (index < 3) {
-            return <ScheduleCard schedule={schedule} key={schedule.id} />
+            return (
+              <ScheduleCard
+                schedule={schedule}
+                key={schedule.id}
+                token={token}
+              />
+            )
           }
 
           return <></>

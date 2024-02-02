@@ -39,7 +39,7 @@ export function SchedulesContainer(props: CalendarProps) {
         </div>
       </div>
       {data?.map((schedule) => (
-        <ScheduleCard schedule={schedule} key={schedule.id} />
+        <ScheduleCard schedule={schedule} key={schedule.id} token={token} />
       ))}
       {data?.length === 0 && (
         <EmptyState message="Nenhum agendamento nessa data" />
