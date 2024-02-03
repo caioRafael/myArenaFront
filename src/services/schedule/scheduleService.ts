@@ -51,8 +51,13 @@ export class ScheduleService implements ResourceService<Schedule, Schedule> {
   async pratialUpdate(
     data: Partial<Schedule>,
     id: string,
+    token?: string,
   ): Promise<Schedule | null> {
-    const response = await this.baseApi.patch(`schedule/status/${id}`, data)
+    const response = await this.baseApi.patch(
+      `schedule/status/${id}`,
+      data,
+      token,
+    )
 
     return response.data
   }

@@ -11,6 +11,8 @@ import {
 } from './ui/dropdown-menu'
 import { ChevronDown, User } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
+import Logotype from '@/assets/Logotype.svg'
 
 interface HeaderProps {
   username: string
@@ -35,9 +37,10 @@ export async function Header(props: HeaderProps) {
         currentProfile={profile}
       />
 
-      <h1 className="font-semibold text-3xl">
+      {/* <h1 className="font-semibold text-3xl">
         <span className="text-white">My</span> Arena
-      </h1>
+      </h1> */}
+      <Image src={Logotype} alt="logotype connect sport" />
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

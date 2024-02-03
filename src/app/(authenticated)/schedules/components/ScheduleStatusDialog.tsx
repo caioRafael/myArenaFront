@@ -14,13 +14,14 @@ interface ScheduleStatusDialogProps {
   scheduleId: string
   currentStatus: ScheduleStatusEnum
   hour: number
+  token: string
 }
 
 export function ScheduleStatusDialog(props: ScheduleStatusDialogProps) {
-  const { scheduleId, currentStatus, hour } = props
+  const { scheduleId, currentStatus, hour, token } = props
   const [open, setOpen] = useState<boolean>(false)
 
-  const { mutateAsync } = scheduleQueryService.usePatch(scheduleId)
+  const { mutateAsync } = scheduleQueryService.usePatch(scheduleId, token)
 
   const handleUpdateStatus = async () => {
     const data = {

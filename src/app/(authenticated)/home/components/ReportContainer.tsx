@@ -15,20 +15,20 @@ export function ReportContainer(props: ReportContainerProps) {
   const { data } = arenaReportQueryService.useFindOne(arenaId, token)
 
   return (
-    <div className="flex gap-3 flex-wrap">
-      <Card className="p-4">
+    <div className="flex gap-3 flex-wrap w-full">
+      <Card className="p-4 flex flex-col flex-1 rounded-lg">
         <h1>Agendamentos do mês:</h1>
         <h1 className="text-2xl text-primary font-semibold">
           {data?.schedules || 0}
         </h1>
       </Card>
-      <Card className="p-4">
+      <Card className="p-4 flex flex-col flex-1 rounded-lg">
         <h1>Faturamento esperado:</h1>
         <h1 className="text-2xl text-primary font-semibold">
           {formatPrice((data?.espec as number) || 0)}
         </h1>
       </Card>
-      <Card className="p-4">
+      <Card className="p-4 flex flex-col flex-1 rounded-lg">
         <h1>Faturamento arrecadado:</h1>
         <h1 className="text-2xl text-primary font-semibold">
           {formatPrice((data?.revenue as number) || 0)}
