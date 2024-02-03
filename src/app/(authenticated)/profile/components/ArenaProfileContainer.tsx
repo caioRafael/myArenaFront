@@ -9,7 +9,6 @@ export default function ArenaProfileContainer(
   props: ArenaProfileContainerProps,
 ) {
   const { arena } = props
-  console.log(arena)
   return (
     <div className="flex flex-col space-y-10">
       <h1>Arena</h1>

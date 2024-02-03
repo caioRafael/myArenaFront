@@ -16,7 +16,6 @@ export function EmployeeDetailSheet(props: EmployeeDetailSheetProps) {
   const { user } = props
   const [open, setOpen] = useState<boolean>(false)
 
-  console.log(user)
   return (
     <AppSheet
       title="Detalhar funcionário"
