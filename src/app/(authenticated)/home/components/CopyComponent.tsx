@@ -1,5 +1,6 @@
 'use client'
 
+import { BasicUserContainer } from '@/components/BasicUserContainer'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
 import { Copy } from 'lucide-react'
@@ -24,9 +25,12 @@ export function CopyComponent(props: CopyComponentProps) {
     })
   }
   return (
-    <Button onClick={handleCopyLink} className="flex gap-2">
-      <Copy />
-      Gerar link
-    </Button>
+    <div className="flex flex-col gap-3">
+      <BasicUserContainer name="caio rafael" />
+      <Button onClick={handleCopyLink} className="flex gap-2">
+        <Copy />
+        Gerar link
+      </Button>
+    </div>
   )
 }
