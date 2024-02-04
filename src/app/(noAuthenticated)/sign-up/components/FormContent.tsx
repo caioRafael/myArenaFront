@@ -10,6 +10,8 @@ import { arenaQueryService } from '@/services/arena'
 import { Spin } from '@/components/Spin'
 import { useRouter } from 'next/navigation'
 import { Checkbox } from '@/components/ui/checkbox'
+import { MaskInput } from '@/components/MaskInput'
+import { MaskEnum } from '@/utils/masks'
 
 export function FormContent() {
   const { toast } = useToast()
@@ -32,6 +34,8 @@ export function FormContent() {
   const [userPhone, setUserPhone] = useState<string>('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+
+  const [teste, setTeste] = useState('')
 
   const { mutateAsync, isPending } = arenaQueryService.useCreate()
 
@@ -77,6 +81,13 @@ export function FormContent() {
 
       {stage === 1 ? (
         <>
+          <MaskInput
+            placeholder="teste"
+            value={teste}
+            typeMask={MaskEnum.CEP}
+            onMaskedChange={setTeste}
+            maxLength={9}
+          />
           <div className="flex flex-col w-full gap-2">
             <Label>Nome fantasia</Label>
             <Input
@@ -97,20 +108,22 @@ export function FormContent() {
           </div>
           <div className="flex flex-col w-full gap-2">
             <Label>CNPJ</Label>
-            <Input
+            <MaskInput
               placeholder="CNPJ"
               type="text"
+              typeMask={MaskEnum.CNPJ}
               value={cnpj}
-              onChange={(e) => setCnpj(e.target.value)}
+              onMaskedChange={setCnpj}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
-            <Label>Telefone da empresa (Wathsapp)</Label>
-            <Input
-              placeholder="Telefone (Wathsapp)"
+            <Label>Telefone da empresa (WhatsApp)</Label>
+            <MaskInput
+              placeholder="Telefone (WhatsApp)"
               type="text"
+              typeMask={MaskEnum.PHONE}
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onMaskedChange={setPhone}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -173,11 +186,12 @@ export function FormContent() {
           </div>
           <div className="flex flex-col w-full gap-2">
             <Label>Telefone do administrador</Label>
-            <Input
+            <MaskInput
               placeholder="Telefone"
               type="text"
+              typeMask={MaskEnum.PHONE}
               value={userPhone}
-              onChange={(e) => setUserPhone(e.target.value)}
+              onMaskedChange={setUserPhone}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
