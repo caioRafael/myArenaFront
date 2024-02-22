@@ -14,10 +14,8 @@ export function MaskInput(props: MaskInputProps) {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value
-    // const maskedValue = maskCNPJ(inputValue)
     const mask = Mask[typeMask]
-
     onMaskedChange(mask(inputValue))
   }
-  return <Input value={value} onChange={handleChange} {...props} />
+  return <Input {...props} value={value} onChange={handleChange} />
 }

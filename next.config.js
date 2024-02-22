@@ -2,7 +2,7 @@
 const nextConfig = {
   env: {
     API_URL: process.env.API_URL,
-    ENVIROMENT: process.env.ENVIROMENT,
+    COPY_URL: process.env.COPY_URL,
   },
 }
 
