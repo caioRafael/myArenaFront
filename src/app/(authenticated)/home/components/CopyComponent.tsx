@@ -12,13 +12,10 @@ interface CopyComponentProps {
 export function CopyComponent(props: CopyComponentProps) {
   const { arenaId } = props
 
-  const copyUrl =
-    process.env.ENVIROMENT === 'dev'
-      ? `http://localhost:3000/client/${arenaId}`
-      : `https://connectsport.vercel.app/${arenaId}`
+  const copyUrl = `${process.env.COPY_URL}/${arenaId}`
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(copyUrl)
+    navigator.clipboard.writeText(copyUrl as string)
     toast({
       title: 'Link copiado',
       description: 'Link de agendamento copiado com sucesso!',

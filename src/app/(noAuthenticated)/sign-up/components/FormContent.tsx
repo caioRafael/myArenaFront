@@ -12,35 +12,59 @@ import { useRouter } from 'next/navigation'
 import { Checkbox } from '@/components/ui/checkbox'
 import { MaskInput } from '@/components/MaskInput'
 import { MaskEnum } from '@/utils/masks'
+import { useForm, useController, Controller } from 'react-hook-form'
+import { ArenaSignUpSchema, arenaSignUpSchema } from './ArenaSignUpSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export function FormContent() {
   const { toast } = useToast()
   const router = useRouter()
+  const { register, handleSubmit, setValue, control, formState } =
+    useForm<ArenaSignUpSchema>({
+      resolver: zodResolver(arenaSignUpSchema),
+    })
   const [stage, setStage] = useState<number>(1)
 
-  // States for stage 1 fields
-  const [fantasyName, setFantasyName] = useState('')
-  const [corporateName, setCorporateName] = useState('')
-  const [cnpj, setCnpj] = useState('')
-  const [phone, setPhone] = useState('')
-  const [address, setAddress] = useState('')
-  const [pixKey, setPixKey] = useState('')
-  const [requirePrePayment, setRequirePrePayment] = useState<boolean>(false)
+  const { field: cnpj } = useController({
+    control,
+    name: 'cnpj',
+    defaultValue: '',
+  })
 
-  // States for stage 2 fields
-  const [name, setName] = useState('')
-  const [nickname, setNickname] = useState('')
-  const [email, setEmail] = useState('')
-  const [userPhone, setUserPhone] = useState<string>('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const { field: phone } = useController({
+    control,
+    name: 'phone',
+    defaultValue: '',
+  })
 
-  const [teste, setTeste] = useState('')
+  const { field: admPhone } = useController({
+    control,
+    name: 'administrator.phone',
+    defaultValue: '',
+  })
+
+  // // States for stage 1 fields
+  // const [fantasyName, setFantasyName] = useState('')
+  // const [corporateName, setCorporateName] = useState('')
+  // // const [cnpj, setCnpj] = useState('')
+  // // const [phone, setPhone] = useState('')
+  // const [address, setAddress] = useState('')
+  // const [pixKey, setPixKey] = useState('')
+  // const [requirePrePayment, setRequirePrePayment] = useState<boolean>(false)
+
+  // // States for stage 2 fields
+  // const [name, setName] = useState('')
+  // const [nickname, setNickname] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [userPhone, setUserPhone] = useState<string>('')
+  // const [password, setPassword] = useState('')
+  // const [confirmPassword, setConfirmPassword] = useState('')
 
   const { mutateAsync, isPending } = arenaQueryService.useCreate()
 
-  const handleCreateArena = async () => {
-    if (password !== confirmPassword) {
+  const handleCreateArena = async (data: ArenaSignUpSchema) => {
+    console.log(data)
+    if (data.administrator.password !== data.administrator.confirmPassword) {
       toast({
         title: 'Senha',
         description: 'As senhas não conferem.',
@@ -49,52 +73,51 @@ export function FormContent() {
       return new Error('As senhas não conferem')
     }
 
-    const data = {
-      fantasyName,
-      corporateName,
-      cnpj,
-      phone,
-      address,
-      pixKey,
-      requirePrePayment,
-      administrator: {
-        name,
-        nickname,
-        phone: userPhone,
-        email,
-        password,
-      },
-    }
+    if (formState.errors) console.log(formState.errors.administrator?.name)
 
-    const response = await mutateAsync(data)
+    // const data = {
+    //   fantasyName,
+    //   corporateName,
+    //   // cnpj,
+    //   phone,
+    //   address,
+    //   pixKey,
+    //   requirePrePayment,
+    //   administrator: {
+    //     name,
+    //     nickname,
+    //     phone: userPhone,
+    //     email,
+    //     password,
+    //   },
+    // }
 
-    if (response) router.replace('/')
+    // const response = await mutateAsync(data)
+
+    // if (response) router.replace('/')
   }
   return (
-    <div className="flex flex-col items-center justify-center w-full p-3 gap-5 border border-border rounded-md">
+    <form
+      onSubmit={handleSubmit(handleCreateArena)}
+      className="flex flex-col items-center justify-center w-full p-3 gap-5 border border-border rounded-md"
+    >
       <h1>Cadastre sua arena</h1>
 
       <Progress value={stage === 1 ? 50 : 100} />
       <p className="self-start">
-        dados {stage === 1 ? 'da arena' : 'do administrador'}
+        Dados {stage === 1 ? 'da arena' : 'do administrador'}
       </p>
 
       {stage === 1 ? (
         <>
-          <MaskInput
-            placeholder="teste"
-            value={teste}
-            typeMask={MaskEnum.CEP}
-            onMaskedChange={setTeste}
-            maxLength={9}
-          />
           <div className="flex flex-col w-full gap-2">
             <Label>Nome fantasia</Label>
             <Input
               placeholder="Nome fantasia"
               type="text"
-              value={fantasyName}
-              onChange={(e) => setFantasyName(e.target.value)}
+              // value={fantasyName}
+              // onChange={(e) => setFantasyName(e.target.value)}
+              {...register('fantasyName')}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -102,8 +125,7 @@ export function FormContent() {
             <Input
               placeholder="Rasão social"
               type="text"
-              value={corporateName}
-              onChange={(e) => setCorporateName(e.target.value)}
+              {...register('corporateName')}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -112,8 +134,9 @@ export function FormContent() {
               placeholder="CNPJ"
               type="text"
               typeMask={MaskEnum.CNPJ}
-              value={cnpj}
-              onMaskedChange={setCnpj}
+              value={cnpj.value}
+              onMaskedChange={(value) => setValue('cnpj', value)}
+              maxLength={18}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -122,8 +145,9 @@ export function FormContent() {
               placeholder="Telefone (WhatsApp)"
               type="text"
               typeMask={MaskEnum.PHONE}
-              value={phone}
-              onMaskedChange={setPhone}
+              value={phone.value}
+              onMaskedChange={(value) => setValue('phone', value)}
+              maxLength={15}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -131,8 +155,7 @@ export function FormContent() {
             <Input
               placeholder="Endereço"
               type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              {...register('address')}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -140,28 +163,44 @@ export function FormContent() {
             <Input
               placeholder="chave pix"
               type="text"
-              value={pixKey}
-              onChange={(e) => setPixKey(e.target.value)}
+              {...register('pixKey')}
             />
           </div>
           <div className="flex items-center space-x-2">
-            <Checkbox
-              id="terms"
-              checked={requirePrePayment}
-              onCheckedChange={(value) =>
-                setRequirePrePayment(value as boolean)
-              }
+            <Controller
+              name="requirePrePayment"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <>
+                  <Checkbox
+                    id="terms"
+                    checked={field.value}
+                    onCheckedChange={(value) => field.onChange(value)}
+                  />
+                  <label
+                    htmlFor="terms"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Exigência de pagamento adiantado (Ao marcar essa opção, o
+                    estabelecimento exige que o cliente pague metade do valor do
+                    agendamento de forma antecipada)
+                  </label>
+                </>
+              )}
             />
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Exigência de pagamento adiantado (Ao marcar essa opção, o
-              estabelecimento exige que o cliente pague metade do valor do
-              agendamento de forma antecipada)
-            </label>
           </div>
-          <Button onClick={() => setStage(2)}>Próximo</Button>
+          <Button
+            onClick={() => {
+              setValue('administrator.name', '')
+              setValue('administrator.nickname', '')
+              setValue('administrator.password', '')
+              setValue('administrator.confirmPassword', '')
+              setStage(2)
+            }}
+          >
+            Próximo
+          </Button>
         </>
       ) : (
         // Stage 2
@@ -171,8 +210,7 @@ export function FormContent() {
             <Input
               placeholder="Nome"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              {...register('administrator.name')}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -180,8 +218,7 @@ export function FormContent() {
             <Input
               placeholder="Apelido"
               type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              {...register('administrator.nickname')}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -190,8 +227,8 @@ export function FormContent() {
               placeholder="Telefone"
               type="text"
               typeMask={MaskEnum.PHONE}
-              value={userPhone}
-              onMaskedChange={setUserPhone}
+              value={admPhone.value}
+              onMaskedChange={(value) => setValue('administrator.phone', value)}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -199,8 +236,7 @@ export function FormContent() {
             <Input
               placeholder="Email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              {...register('administrator.email')}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -208,8 +244,7 @@ export function FormContent() {
             <Input
               placeholder="Senha"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register('administrator.password')}
             />
           </div>
           <div className="flex flex-col w-full gap-2">
@@ -217,20 +252,24 @@ export function FormContent() {
             <Input
               placeholder="Confirmar senha"
               type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              defaultValue={''}
+              {...register('administrator.confirmPassword')}
             />
           </div>
           <div className="flex gap-3">
             <Button onClick={() => setStage(1)} variant={'outline'}>
               Voltar
             </Button>
-            <Button disabled={isPending} onClick={handleCreateArena}>
+            <Button
+              type="submit"
+              disabled={isPending}
+              // onClick={handleCreateArena}
+            >
               {isPending ? <Spin /> : 'Cadastrar'}
             </Button>
           </div>
         </>
       )}
-    </div>
+    </form>
   )
 }
