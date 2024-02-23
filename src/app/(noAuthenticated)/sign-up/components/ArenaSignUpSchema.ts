@@ -1,60 +1,37 @@
 import { z } from 'zod'
 
-// {
-//     fantasyName,
-//     corporateName,
-//     cnpj,
-//     phone,
-//     address,
-//     pixKey,
-//     requirePrePayment,
-//     administrator: {
-//       name,
-//       nickname,
-//       phone: userPhone,
-//       email,
-//       password,
-//     },
-//   }
-
 export const CreateUserSquema = z.object({
-  name: z.string({
-    required_error: 'administrator name is required',
-  }),
-  nickname: z.string({
-    required_error: 'nickname is required',
-  }),
-  phone: z.string({
-    required_error: 'phone is required',
-  }),
+  name: z.string().trim().min(1, 'Informe o nome do administrador'),
+  nickname: z.string().trim().min(1, 'Informe o apelido do administrador'),
+  phone: z.string().trim().min(1, 'Informe o telefone do administrador'),
   email: z
-    .string({
-      required_error: 'administrator email is required',
-    })
+    .string()
     .email({
-      message: 'invalid email',
-    }),
-  password: z.string({
-    required_error: 'password is required',
-  }),
-  confirmPassword: z.string({
-    required_error: 'password is required',
-  }),
+      message: 'E-mail invalido',
+    })
+    .trim()
+    .min(1, 'Informe o e-mail do administrador para realizar o cadastro'),
+  password: z
+    .string()
+    .trim()
+    .min(4, 'Informe uma senha com no mínimo 4 caracteres'),
+  confirmPassword: z
+    .string()
+    .trim()
+    .min(4, 'Informe uma senha com no mínimo 4 caracteres'),
 })
 
 export const arenaSignUpSchema = z.object({
-  administrator: CreateUserSquema,
-  fantasyName: z.string({
-    required_error: 'fantasy name is required',
-  }),
-  corporateName: z.string(),
-  cnpj: z.string(),
-  phone: z.string({
-    required_error: 'phone is required',
-  }),
-  address: z.string(),
+  // administrator: CreateUserSquema,
+  fantasyName: z.string().trim().min(1, 'Informe o nome fantasia da sua arena'),
+  corporateName: z.string().trim(),
+  cnpj: z.string().trim(),
+  phone: z.string().trim().min(1, 'Informe o telefone da sua arena'),
+  address: z.string().trim().min(1, 'Informe o endereço da sua arena'),
   pixKey: z.string(),
   requirePrePayment: z.boolean(),
 })
 
 export type ArenaSignUpSchema = z.infer<typeof arenaSignUpSchema>
+
+export type AdministrateSchema = z.infer<typeof CreateUserSquema>

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { ReactNode } from 'react'
 
 import InitialImage from '@/assets/Inital-page-image.svg'
+import SecondaryLogo from '@/assets/SecondaryLogo.svg'
 import { getServerSession } from 'next-auth'
 import { nextAuthOptions } from '../api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
@@ -25,9 +26,12 @@ export default async function AppLayout({ children }: AppLayoutProps) {
         />
       </div>
       <div className="flex flex-col p-10 items-center justify-center gap-7">
-        <h1 className="font-semibold text-3xl">
-          <span className="text-primary">My</span> Arena
-        </h1>
+        <Image
+          width={300}
+          height={100}
+          src={SecondaryLogo}
+          alt="Logotype connect sport"
+        />
 
         {children}
       </div>

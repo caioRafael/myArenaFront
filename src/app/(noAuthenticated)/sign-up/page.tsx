@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FormContent } from './components/FormContent'
+// import { ArenaForm } from './components/ArenaForm'
 
 export default async function SignUpPage() {
   return (
