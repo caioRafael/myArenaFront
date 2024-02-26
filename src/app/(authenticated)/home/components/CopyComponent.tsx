@@ -7,10 +7,11 @@ import { Copy } from 'lucide-react'
 
 interface CopyComponentProps {
   arenaId: string
+  username: string
 }
 
 export function CopyComponent(props: CopyComponentProps) {
-  const { arenaId } = props
+  const { arenaId, username } = props
 
   const copyUrl = `${process.env.COPY_URL}/${arenaId}`
 
@@ -23,7 +24,7 @@ export function CopyComponent(props: CopyComponentProps) {
   }
   return (
     <div className="flex flex-col gap-3">
-      <BasicUserContainer name="caio rafael" />
+      <BasicUserContainer name={username} />
       <Button onClick={handleCopyLink} className="flex gap-2">
         <Copy />
         Gerar link

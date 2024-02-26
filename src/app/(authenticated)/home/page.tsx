@@ -1,27 +1,33 @@
 import { AppPage } from '@/components/AppPage'
 import { CopyComponent } from './components/CopyComponent'
 import { getUser } from '@/lib/auth'
-import { Card } from '@/components/ui/card'
 import { SchedulesItemsContainer } from './components/SchedulesItemsContainer'
 import { ReportContainer } from './components/ReportContainer'
 import { UserProfileEnum } from '@/types/User'
 import { Separator } from '@/components/ui/separator'
+import { unstable_cache as unstableCache } from 'next/cache'
+
+const getCurrentUser = unstableCache(
+  async () => {
+    return await getUser()
+  },
+  [],
+  {
+    revalidate: 60 * 5,
+  },
+)
 
 export default async function Home() {
-  const { arena, token, profile } = await getUser()
+  const { arena, token, profile, username } = await getCurrentUser()
   return (
     <AppPage
       title="Dashboard"
       hasNavigation={false}
-      topRightContainer={<CopyComponent arenaId={arena.id as string} />}
+      topRightContainer={
+        <CopyComponent arenaId={arena.id as string} username={username} />
+      }
       className="flex flex-col gap-3"
     >
-      {/* <Card className="hidden md:flex p-4 items-center justify-between">
-        <b>{arena.fantasyName}</b>
-        <b>{arena.phone}</b>
-        <b>{arena.address}</b>
-      </Card> */}
-
       {profile === UserProfileEnum.ADMINISTRATOR && (
         <ReportContainer arenaId={arena.id as string} token={token} />
       )}
