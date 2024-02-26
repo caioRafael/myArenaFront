@@ -9,4 +9,8 @@ export default interface Arena extends Entity {
   address: string
   administratorId?: string
   administrator: User
+  cep: string
+  city: string
+  uf: string
+  locale: string
 }

@@ -47,7 +47,6 @@ export function AdministratorForm(props: AdministratorFormProps) {
   })
 
   const handleCreateUser = async (data: AdministrateSchema) => {
-    console.log(data)
     if (data.password !== data.confirmPassword) {
       toast({
         title: 'Senha',
@@ -164,7 +163,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
           )}
         />
         <div className="flex gap-1 flex-row">
-          <Button variant={'link'} onClick={() => setStage(1)}>
+          <Button variant={'link'} onClick={() => setStage(2)}>
             Voltar
           </Button>
           <Button type="submit">{isPending ? <Spin /> : 'Cadastrar'}</Button>

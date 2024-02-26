@@ -27,11 +27,20 @@ export const arenaSignUpSchema = z.object({
   corporateName: z.string().trim(),
   cnpj: z.string().trim(),
   phone: z.string().trim().min(1, 'Informe o telefone da sua arena'),
-  address: z.string().trim().min(1, 'Informe o endereço da sua arena'),
   pixKey: z.string(),
   requirePrePayment: z.boolean(),
+})
+
+export const localizationSchema = z.object({
+  address: z.string().trim().min(1, 'Informe o endereço da sua arena'),
+  cep: z.string().min(1, 'Informe o CEP da sua arena'),
+  city: z.string().min(2, 'Informe a cidade de sua arena'),
+  uf: z.string().min(2, 'Informe o estado'),
+  locale: z.string().min(1, 'Informe o bairro'),
 })
 
 export type ArenaSignUpSchema = z.infer<typeof arenaSignUpSchema>
 
 export type AdministrateSchema = z.infer<typeof CreateUserSquema>
+
+export type LocalizationSchema = z.infer<typeof localizationSchema>

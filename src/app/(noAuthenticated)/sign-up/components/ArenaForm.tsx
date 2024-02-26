@@ -44,7 +44,6 @@ export function ArenaForm(props: ArenaFormProps) {
   })
 
   const handleCreateArena = async (data: ArenaSignUpSchema) => {
-    console.log(data)
     setArenaData(data)
     setStage(2)
   }
@@ -116,19 +115,6 @@ export function ArenaForm(props: ArenaFormProps) {
                   value={phone.value}
                   onMaskedChange={(value) => form.setValue('phone', value)}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Endereço</FormLabel>
-              <FormControl>
-                <Input placeholder="Digite o endereço" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
