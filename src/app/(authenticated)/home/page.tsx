@@ -24,7 +24,11 @@ export default async function Home() {
       title="Dashboard"
       hasNavigation={false}
       topRightContainer={
-        <CopyComponent arenaId={arena.id as string} username={username} />
+        arena.id ? (
+          <CopyComponent arenaId={arena.id as string} username={username} />
+        ) : (
+          <></>
+        )
       }
       className="flex flex-col gap-3"
     >

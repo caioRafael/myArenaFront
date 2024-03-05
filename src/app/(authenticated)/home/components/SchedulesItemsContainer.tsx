@@ -12,6 +12,7 @@ interface SchedulesItemsContainerProps {
 export function SchedulesItemsContainer(props: SchedulesItemsContainerProps) {
   const { arenaId, token } = props
   const currentDate = new Date().setHours(0, 0, 0, 0)
+  console.log('data', currentDate)
   const { data } = scheduleQueryService.useFindAll(
     arenaId,
     new Date(currentDate),
