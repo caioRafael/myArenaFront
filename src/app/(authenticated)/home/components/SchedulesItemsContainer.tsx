@@ -17,6 +17,7 @@ export function SchedulesItemsContainer(props: SchedulesItemsContainerProps) {
     arenaId,
     new Date(currentDate),
     token,
+    '',
   )
   useWebSocket('findSchedules', scheduleQueryService)
 
