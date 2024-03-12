@@ -1,6 +1,6 @@
 import { Header } from '@/components/Header'
 import { SideBar } from '@/components/SideBar'
-import { getUser } from '@/lib/newAuth'
+import { getUser } from '@/lib/auth'
 import TypeRouteEnum from '@/types/enum/TypeRouteEnum'
 import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
@@ -10,7 +10,7 @@ interface AppLayoutProps {
 }
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const user = await getUser(TypeRouteEnum.ARENA_ROUTE)
+  const user = await getUser()
 
   if (!user) {
     redirect('/')

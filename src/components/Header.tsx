@@ -1,6 +1,5 @@
-import { getUser } from '@/lib/newAuth'
+import { getUser } from '@/lib/auth'
 import { MobileSidebar } from './MobileSidebar'
-import TypeRouteEnum from '@/types/enum/TypeRouteEnum'
 import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import Logotype from '@/assets/Logotype.svg'
@@ -11,7 +10,7 @@ interface HeaderProps {
 
 export async function Header(props: HeaderProps) {
   const { username } = props
-  const user = await getUser(TypeRouteEnum.ARENA_ROUTE)
+  const user = await getUser()
 
   if (!user) {
     redirect('/')
