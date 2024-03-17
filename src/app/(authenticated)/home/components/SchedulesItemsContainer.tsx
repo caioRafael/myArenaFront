@@ -11,11 +11,14 @@ interface SchedulesItemsContainerProps {
 
 export function SchedulesItemsContainer(props: SchedulesItemsContainerProps) {
   const { arenaId, token } = props
-  const currentDate = new Date()
-  const sendDate = `${currentDate.getFullYear()}-${
-    currentDate.getMonth() < 9 ? '0' : ''
-  }${currentDate.getMonth() + 1}-${currentDate.getDate()}`
-  const { data } = scheduleQueryService.useFindAll(arenaId, sendDate, token, '')
+  const currentDate = new Date().setHours(0, 0, 0, 0)
+  console.log('data', new Date(currentDate))
+  const { data } = scheduleQueryService.useFindAll(
+    arenaId,
+    new Date(currentDate),
+    token,
+    '',
+  )
   useWebSocket('findSchedules', scheduleQueryService)
 
   if (data?.length === 0)

@@ -21,7 +21,9 @@ export class ScheduleService implements ResourceService<Schedule, Schedule> {
     code?: string,
   ): Promise<Schedule[]> {
     const response = await this.baseApi.getAll(
-      `/schedule/arena/${arenaId}?date=${date}&${code && `code=${code}`}`,
+      `/schedule/arena/${arenaId}?date=${date}${code && '&'}${
+        code && `code=${code}`
+      }`,
       token,
     )
 
