@@ -1,6 +1,7 @@
 'use client'
 
 import { AppSheet } from '@/components/AppSheet'
+import { Badge } from '@/components/ui/badge'
 import Field from '@/types/Field'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
 import { useState } from 'react'
@@ -30,7 +31,13 @@ export function FieldDetailsSheet(props: FieldDetailsSheetProps) {
       </div>
       <div>
         <h1>Esportes:</h1>
-        {field.sports}
+        <div className="flex flex-row flex-wrap gap-1">
+          {field.sports.split(', ').map((sport) => (
+            <Badge key={sport} className="flex gap-2 h-6">
+              {sport}
+            </Badge>
+          ))}
+        </div>
       </div>
     </AppSheet>
   )

@@ -88,7 +88,7 @@ export function LocalizationForm(props: LocalizationProps) {
               <FormLabel>CEP</FormLabel>
               <FormControl>
                 <MaskInput
-                  placeholder="Telefone "
+                  placeholder="CEP "
                   {...field}
                   typeMask={MaskEnum.CEP}
                   type="text"

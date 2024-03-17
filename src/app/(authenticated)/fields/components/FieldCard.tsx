@@ -1,10 +1,9 @@
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import Field from '@/types/Field'
 import { convertNumberInHour } from '@/utils/convetHourInDate'
 import { FieldDetailsSheet } from './FieldDetailsSheet'
-
+import { Badge } from '@/components/ui/badge'
 interface FieldCardProps {
   field: Field
 }
@@ -12,8 +11,10 @@ interface FieldCardProps {
 export function FieldCard(props: FieldCardProps) {
   const { field } = props
 
+  const sportList = field.sports.split(', ')
+
   return (
-    <Card className="min-w-[300px]">
+    <Card className="w-[300px]">
       <CardHeader className="p-4">{field.name}</CardHeader>
       <Separator />
       <CardContent className="my-2">
@@ -22,13 +23,26 @@ export function FieldCard(props: FieldCardProps) {
           {field.price}
         </div>
         <div>
-          <h1>Horarios:</h1>
+          <h1>Horários:</h1>
           {convertNumberInHour(field.openIn)} -{' '}
           {convertNumberInHour(field.closeIn)}
         </div>
         <div>
           <h1>Esportes:</h1>
-          {field.sports}
+          <div className="flex flex-row flex-wrap gap-1">
+            {sportList.map((sport, index) =>
+              index <= 2 ? (
+                <Badge key={sport} className="flex gap-2 h-6">
+                  {sport}
+                </Badge>
+              ) : (
+                <></>
+              ),
+            )}
+            {sportList.length > 3 && (
+              <Badge className="flex gap-2 h-6">+{sportList.length - 3}</Badge>
+            )}
+          </div>
         </div>
       </CardContent>
       <CardFooter>

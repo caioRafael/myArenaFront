@@ -7,7 +7,7 @@ export const CreateUserSquema = z.object({
   email: z
     .string()
     .email({
-      message: 'E-mail invalido',
+      message: 'E-mail inválido',
     })
     .trim()
     .min(1, 'Informe o e-mail do administrador para realizar o cadastro'),
