@@ -16,8 +16,11 @@ interface CalendarProps {
 
 export function SchedulesContainer(props: CalendarProps) {
   const { token, arenaId } = props
-  const currentDate = new Date().setHours(0, 0, 0, 0)
-  const [date, setDate] = useState<Date | undefined>(new Date(currentDate))
+  const currentDate = new Date()
+  const sendDate = `${currentDate.getFullYear()}-${
+    currentDate.getMonth() < 9 ? '0' : ''
+  }${currentDate.getMonth() + 1}-${currentDate.getDate()}`
+  const [date, setDate] = useState<string | undefined>(sendDate)
   const [code, setCode] = useState<string | undefined>(undefined)
   const { data, refetch } = scheduleQueryService.useFindAll(
     arenaId,
@@ -25,11 +28,21 @@ export function SchedulesContainer(props: CalendarProps) {
     token,
     code,
   )
+
+  const setNewDate = (date: Date | undefined) => {
+    if (date) {
+      const newSendDate = `${date.getFullYear()}-${
+        date.getMonth() < 9 ? '0' : ''
+      }${date.getMonth() + 1}-${date.getDate()}`
+
+      setDate(newSendDate)
+    }
+  }
   return (
     <div className="flex flex-col w-full gap-6">
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div className="flex flex-col md:flex-row gap-3">
-          <DatePicker date={date as Date} setDate={setDate} />
+          <DatePicker date={new Date(date as string)} setDate={setNewDate} />
           <Input
             placeholder="Código"
             value={code}
