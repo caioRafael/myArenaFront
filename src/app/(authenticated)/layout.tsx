@@ -1,16 +1,27 @@
 import { Header } from '@/components/Header'
 import { SideBar } from '@/components/SideBar'
 import { getUser } from '@/lib/auth'
-import TypeRouteEnum from '@/types/enum/TypeRouteEnum'
 import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
+import { unstable_cache as unstableCache } from 'next/cache'
 
 interface AppLayoutProps {
   children: ReactNode
 }
 
+const getCurrentUser = unstableCache(
+  async () => {
+    return await getUser()
+  },
+  [],
+  {
+    revalidate: 5,
+    tags: ['arenaUser'],
+  },
+)
+
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const user = await getUser()
+  const user = await getCurrentUser()
 
   if (!user) {
     redirect('/')

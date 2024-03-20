@@ -59,7 +59,7 @@ export function ScheduleStatusDialog(props: ScheduleStatusDialogProps) {
       disabledButton={disabled}
     >
       <p>
-        <b>Atenção!</b> esta ação irá mudar o status do horario selecionado
+        <b>Atenção!</b> esta ação irá mudar o status do horário selecionado
       </p>
       <div className="flex gap-2">
         {ScheduleStatusRecord[currentStatus]}

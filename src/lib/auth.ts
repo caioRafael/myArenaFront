@@ -12,7 +12,7 @@ export async function getUser() {
   if (!session) {
     redirect('/')
   }
-  const decodedToken: DecodedTokenReturn = jwtDecode(session.access_token)
+  const decodedToken: DecodedTokenReturn = await jwtDecode(session.access_token)
 
   const { data } = await api.get(`/arena/user/${decodedToken.sub}`, {
     headers: {
