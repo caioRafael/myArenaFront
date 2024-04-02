@@ -70,7 +70,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Nome do administrador</FormLabel>
+              <FormLabel>Nome do administrador *</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Digite o nome do adminstrador da arena"
@@ -86,7 +86,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
           name="nickname"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Apelido</FormLabel>
+              <FormLabel>Apelido *</FormLabel>
               <FormControl>
                 <Input placeholder="Digite o apelido" {...field} />
               </FormControl>
@@ -99,7 +99,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
           name="phone"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Telefone do administrador</FormLabel>
+              <FormLabel>Telefone do administrador *</FormLabel>
               <FormControl>
                 <MaskInput
                   placeholder="Digite o telefone"
@@ -120,7 +120,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
           name="email"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>E-mail</FormLabel>
+              <FormLabel>E-mail *</FormLabel>
               <FormControl>
                 <Input placeholder="Digite o email" {...field} type="email" />
               </FormControl>
@@ -133,7 +133,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
           name="password"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Senha</FormLabel>
+              <FormLabel>Senha *</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Digite a senha"
@@ -150,7 +150,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Confirmar senha</FormLabel>
+              <FormLabel>Confirmar senha *</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Digite o senha"

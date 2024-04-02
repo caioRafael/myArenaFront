@@ -1,13 +1,6 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
-import {
-  CalendarCheck,
-  Home,
-  LandPlot,
-  LogOut,
-  User,
-  Users,
-} from 'lucide-react'
+import { CalendarCheck, Home, LandPlot, LogOut, Users } from 'lucide-react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { signOut } from 'next-auth/react'

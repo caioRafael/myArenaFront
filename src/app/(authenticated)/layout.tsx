@@ -9,19 +9,19 @@ interface AppLayoutProps {
   children: ReactNode
 }
 
-const getCurrentUser = unstableCache(
-  async () => {
-    return await getUser()
-  },
-  [],
-  {
-    revalidate: 5,
-    tags: ['arenaUser'],
-  },
-)
+// const getCurrentUser = unstableCache(
+//   async () => {
+//     return await getUser()
+//   },
+//   [],
+//   {
+//     revalidate: 5,
+//     tags: ['arenaUser'],
+//   },
+// )
 
 export default async function AppLayout({ children }: AppLayoutProps) {
-  const user = await getCurrentUser()
+  const user = await getUser()
 
   if (!user) {
     redirect('/')

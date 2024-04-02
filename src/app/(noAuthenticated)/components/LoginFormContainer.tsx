@@ -24,8 +24,6 @@ export function LoginFormContainer() {
       redirect: false,
     })
 
-    console.log(result)
-
     if (result?.error) {
       setLoading(false)
       toast({

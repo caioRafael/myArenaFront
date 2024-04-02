@@ -59,7 +59,7 @@ export function ArenaForm(props: ArenaFormProps) {
           name="fantasyName"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Nome fantasia</FormLabel>
+              <FormLabel>Nome fantasia *</FormLabel>
               <FormControl>
                 <Input placeholder="Digite o nome fantasia" {...field} />
               </FormControl>
@@ -72,7 +72,7 @@ export function ArenaForm(props: ArenaFormProps) {
           name="corporateName"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Razão social</FormLabel>
+              <FormLabel>Razão social *</FormLabel>
               <FormControl>
                 <Input placeholder="Digite a razão social" {...field} />
               </FormControl>
@@ -84,7 +84,7 @@ export function ArenaForm(props: ArenaFormProps) {
           name="cnpj"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>CNPJ</FormLabel>
+              <FormLabel>CNPJ * </FormLabel>
               <FormControl>
                 <MaskInput
                   placeholder="CNPJ"
@@ -104,7 +104,7 @@ export function ArenaForm(props: ArenaFormProps) {
           name="phone"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Telefone da empresa (WhatsApp)</FormLabel>
+              <FormLabel>Telefone da empresa (WhatsApp) *</FormLabel>
               <FormControl>
                 <MaskInput
                   placeholder="Telefone (WhatsApp)"

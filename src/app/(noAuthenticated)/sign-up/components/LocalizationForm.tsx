@@ -85,7 +85,7 @@ export function LocalizationForm(props: LocalizationProps) {
           name="cep"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>CEP</FormLabel>
+              <FormLabel>CEP *</FormLabel>
               <FormControl>
                 <MaskInput
                   placeholder="CEP "
@@ -106,7 +106,7 @@ export function LocalizationForm(props: LocalizationProps) {
           name="uf"
           render={({ field }) => (
             <FormItem className="w-full flex flex-col">
-              <FormLabel>UF</FormLabel>
+              <FormLabel>UF *</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -157,7 +157,7 @@ export function LocalizationForm(props: LocalizationProps) {
           name="city"
           render={({ field }) => (
             <FormItem className="w-full flex flex-col">
-              <FormLabel>Cidade</FormLabel>
+              <FormLabel>Cidade *</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -211,7 +211,7 @@ export function LocalizationForm(props: LocalizationProps) {
           name="locale"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Bairro</FormLabel>
+              <FormLabel>Bairro *</FormLabel>
               <FormControl>
                 <Input placeholder="Informe o bairro" {...field} />
               </FormControl>
@@ -224,7 +224,7 @@ export function LocalizationForm(props: LocalizationProps) {
           name="address"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Endereço</FormLabel>
+              <FormLabel>Endereço *</FormLabel>
               <FormControl>
                 <Input placeholder="Informe o endereço" {...field} />
               </FormControl>

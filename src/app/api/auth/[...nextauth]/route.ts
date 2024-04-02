@@ -30,6 +30,7 @@ const nextAuthOptions: NextAuthOptions = {
 
   session: {
     maxAge: 60 * 60 * 12,
+    strategy: 'jwt',
   },
 
   callbacks: {

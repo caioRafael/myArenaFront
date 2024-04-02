@@ -5,20 +5,20 @@ import { SchedulesItemsContainer } from './components/SchedulesItemsContainer'
 import { ReportContainer } from './components/ReportContainer'
 import { UserProfileEnum } from '@/types/User'
 import { Separator } from '@/components/ui/separator'
-import { unstable_cache as unstableCache } from 'next/cache'
+// import { unstable_cache as unstableCache } from 'next/cache'
 
-const getCurrentUser = unstableCache(
-  async () => {
-    return await getUser()
-  },
-  [],
-  {
-    revalidate: 60 * 5,
-  },
-)
+// const getCurrentUser = unstableCache(
+//   async () => {
+//     return await getUser()
+//   },
+//   [],
+//   {
+//     revalidate: 60 * 5,
+//   },
+// )
 
 export default async function Home() {
-  const { arena, token, profile, username } = await getCurrentUser()
+  const { arena, token, profile, username } = await getUser()
   return (
     <AppPage
       title="Dashboard"
