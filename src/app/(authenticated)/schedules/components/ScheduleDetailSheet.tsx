@@ -11,6 +11,13 @@ interface ScheduleDetailSheetProps {
   schedule: Schedule
 }
 
+const FormatDate = (dateTime: string) => {
+  const date = dateTime.split('T')[0]
+  const [year, month, day] = date.split('-')
+
+  return `${day}/${month}/${year}`
+}
+
 export function ScheduleDetailSheet(props: ScheduleDetailSheetProps) {
   const { schedule } = props
   const [open, setOpen] = useState<boolean>(false)
@@ -57,7 +64,7 @@ export function ScheduleDetailSheet(props: ScheduleDetailSheetProps) {
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-col gap-1">
           <b>Data:</b>
-          {format(new Date(schedule.date), 'dd/MM/yyyy')}
+          {FormatDate(schedule.date + '')}
         </div>
         <div className="flex flex-col gap-1">
           <b>Horário:</b>
