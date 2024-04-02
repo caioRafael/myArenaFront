@@ -13,6 +13,16 @@ export function FieldCard(props: FieldCardProps) {
 
   const sportList = field.sports.split(', ')
 
+  const formatPrice = (price: number) => {
+    const opcoesDeFormatacao: Intl.NumberFormatOptions = {
+      style: 'currency',
+      currency: 'BRL',
+    }
+
+    const formatador = new Intl.NumberFormat('pt-BR', opcoesDeFormatacao)
+    return formatador.format(price as number)
+  }
+
   return (
     <Card className="w-[300px]">
       <CardHeader className="p-4">{field.name}</CardHeader>
@@ -20,7 +30,7 @@ export function FieldCard(props: FieldCardProps) {
       <CardContent className="my-2">
         <div>
           <h1>Preço por hora:</h1>
-          {field.price}
+          {formatPrice(field.price)}
         </div>
         <div>
           <h1>Horários:</h1>

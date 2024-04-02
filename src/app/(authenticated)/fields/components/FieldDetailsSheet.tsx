@@ -13,6 +13,16 @@ interface FieldDetailsSheetProps {
 export function FieldDetailsSheet(props: FieldDetailsSheetProps) {
   const { field } = props
   const [open, setOpen] = useState<boolean>(false)
+
+  const formatPrice = (price: number) => {
+    const opcoesDeFormatacao: Intl.NumberFormatOptions = {
+      style: 'currency',
+      currency: 'BRL',
+    }
+
+    const formatador = new Intl.NumberFormat('pt-BR', opcoesDeFormatacao)
+    return formatador.format(price as number)
+  }
   return (
     <AppSheet
       title="Detalhar quadra"
@@ -22,7 +32,7 @@ export function FieldDetailsSheet(props: FieldDetailsSheetProps) {
     >
       <div>
         <h1>Preço por hora:</h1>
-        {field.price}
+        {formatPrice(field.price)}
       </div>
       <div>
         <h1>Horários:</h1>
