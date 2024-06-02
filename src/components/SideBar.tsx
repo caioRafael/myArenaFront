@@ -1,6 +1,13 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
-import { CalendarCheck, Home, LandPlot, LogOut, Users } from 'lucide-react'
+import {
+  CalendarCheck,
+  Home,
+  LandPlot,
+  LogOut,
+  User,
+  Users,
+} from 'lucide-react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { signOut } from 'next-auth/react'
@@ -10,7 +17,7 @@ interface SideBarProps {
   isMobile?: boolean
   closeSheet?: (value: boolean) => void
   arena: string | undefined
-  currentProfile: UserProfileEnum
+  currentProfile?: UserProfileEnum
 }
 
 export function SideBar(props: SideBarProps) {
@@ -26,7 +33,8 @@ export function SideBar(props: SideBarProps) {
 
   async function logout() {
     await signOut({
-      redirect: false,
+      redirect: true,
+      callbackUrl: '/',
     })
 
     router.replace('/')
@@ -39,6 +47,13 @@ export function SideBar(props: SideBarProps) {
       route: 'home',
       icon: <Home />,
       hasPermission: currentProfile !== UserProfileEnum.CLIENT,
+    },
+    {
+      name: 'Perfil',
+      key: 'profile',
+      route: 'profile',
+      icon: <User />,
+      hasPermission: true,
     },
     {
       name: 'Funcionários',

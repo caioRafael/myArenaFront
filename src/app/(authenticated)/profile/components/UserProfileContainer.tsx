@@ -1,9 +1,11 @@
 import { EmptyState } from '@/components/EmptyState'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { userService } from '@/services/user'
 import { UserProfileEnum, UserProfileRecord } from '@/types/User'
 import { format } from 'date-fns'
+import { ImageUp } from 'lucide-react'
 
 interface UserProfileContainerProps {
   userId: string
@@ -22,15 +24,18 @@ export default async function UserProfileContainer(
   const initalsName = user.name.split(' ') as string[]
   return (
     <div className="flex flex-col space-y-10">
-      <div className="grid grid-cols-[16rem_1fr]">
-        <div>
+      <div className="grid grid-cols-[12rem_1fr]">
+        <div className="flex gap-2 relative">
           <Avatar className="w-40 h-40">
             <AvatarFallback>
               {initalsName[0].charAt(0).toUpperCase()}
               {initalsName[1]?.charAt(0).toUpperCase()}
             </AvatarFallback>
-            <AvatarImage src="" />
+            <AvatarImage src={user.avatar || ''} className="object-cover" />
           </Avatar>
+          <Button className="flex rounded-full w-10 h-10 p-0 absolute right-10">
+            <ImageUp />
+          </Button>
         </div>
         <div className="flex flex-col justify-center">
           <h1>{user.name}</h1>

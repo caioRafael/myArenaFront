@@ -17,7 +17,7 @@ export function BasicUserContainer(props: BasicUserContainerProps) {
           {initalsName[0].charAt(0).toUpperCase()}
           {initalsName[1]?.charAt(0).toUpperCase()}
         </AvatarFallback>
-        <AvatarImage src={avatar || ''} />
+        <AvatarImage src={avatar || ''} className="object-cover" />
       </Avatar>
       {/* <ChevronDown className="text-white" /> */}
     </div>

@@ -12,10 +12,11 @@ interface MobileSidebarProps {
   username: string
   arena: string
   currentProfile: UserProfileEnum
+  avatar?: string
 }
 
 export function MobileSidebar(props: MobileSidebarProps) {
-  const { username, arena, currentProfile } = props
+  const { username, arena, currentProfile, avatar } = props
   const [open, setOpen] = useState<boolean>(false)
 
   const initalsName = username.split(' ') as string[]
@@ -34,7 +35,7 @@ export function MobileSidebar(props: MobileSidebarProps) {
                 {initalsName[0].charAt(0).toUpperCase()}
                 {initalsName[1]?.charAt(0).toUpperCase()}
               </AvatarFallback>
-              <AvatarImage src="" />
+              <AvatarImage src={avatar || ''} className="object-cover" />
             </Avatar>
             <h1 className=" font-semibold">{username.toUpperCase()}</h1>
           </div>

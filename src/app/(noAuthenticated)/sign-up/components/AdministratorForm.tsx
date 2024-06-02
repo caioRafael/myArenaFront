@@ -55,7 +55,7 @@ export function AdministratorForm(props: AdministratorFormProps) {
       })
       return new Error('As senhas não conferem')
     }
-    setAdministratorData(data)
+    setAdministratorData({ ...data })
     // setStage(1)
     await handleCreateArena()
   }

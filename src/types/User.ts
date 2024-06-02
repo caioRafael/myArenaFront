@@ -20,7 +20,7 @@ export default interface User extends Entity {
   email: string
   phone?: string
   password?: string
-  prorfile?: string
+  profile?: string
   avatar?: string
   arenaId?: string
   createdAt?: string

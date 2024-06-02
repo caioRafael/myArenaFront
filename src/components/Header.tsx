@@ -3,6 +3,7 @@ import { MobileSidebar } from './MobileSidebar'
 import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import Logotype from '@/assets/Logotype.svg'
+import { UserProfileEnum } from '@/types/User'
 
 interface HeaderProps {
   username: string
@@ -23,7 +24,8 @@ export async function Header(props: HeaderProps) {
       <MobileSidebar
         username={username}
         arena={arena?.fantasyName as string}
-        currentProfile={profile}
+        currentProfile={profile as UserProfileEnum}
+        avatar={user.avatar || ''}
       />
       <Image src={Logotype} alt="logotype connect sport" />
     </div>

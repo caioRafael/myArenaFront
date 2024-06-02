@@ -18,14 +18,18 @@ import { Separator } from '@/components/ui/separator'
 // )
 
 export default async function Home() {
-  const { arena, token, profile, username } = await getUser()
+  const { arena, token, profile, name, avatar } = await getUser()
   return (
     <AppPage
       title="Dashboard"
       hasNavigation={false}
       topRightContainer={
         arena.id ? (
-          <CopyComponent arenaId={arena.id as string} username={username} />
+          <CopyComponent
+            arenaId={arena.id as string}
+            username={name}
+            avatar={avatar}
+          />
         ) : (
           <></>
         )

@@ -17,7 +17,7 @@ export default async function ProfilePage() {
   return (
     <AppPage title="Perfil" className="flex flex-col gap-10">
       <Suspense fallback={<Spin />}>
-        <UserProfileContainer userId={user.id} token={user.token} />
+        <UserProfileContainer userId={user.id as string} token={user.token} />
       </Suspense>
       <Separator />
       {user.arena && <ArenaProfileContainer arena={user.arena} />}
